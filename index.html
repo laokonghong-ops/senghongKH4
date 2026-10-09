@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>វិញ្ញាសាចំណេះដឹងទូទៅ និងវប្បធម៌ទូទៅភាគ៤</title>
+    <link rel="stylesheet" href="វប្បធម៌ទូទៅ1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;700&family=Khmer&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Kantumruy Pro', 'Khmer', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .quiz-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 750px;
+        width: 100%;
+    }
+
+    h1 {
+        color: #1a73e8;
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        color: #5f6368;
+        text-align: center;
+        font-size: 1.1rem;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        color: #5f6368;
+        text-align: center;
+        font-size: 0.9rem;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .timer-box {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+        padding: 12px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-radius: 6px;
+        margin-bottom: 25px;
+        position: sticky;
+        top: 10px;
+        z-index: 100;
+    }
+
+    .timer-box.danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    .section-title {
+        background-color: #e8f0fe;
+        color: #1a73e8;
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-top: 35px;
+        margin-bottom: 15px;
+        border-left: 5px solid #1a73e8;
+    }
+
+    .question-block {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .question-title {
+        font-weight: bold;
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .options label {
+        display: block;
+        padding: 12px;
+        background-color: #f8f9fa;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+        border: 1px solid transparent;
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+
+    .options label:hover {
+        background-color: #e8f0fe;
+    }
+
+    .options input {
+        margin-right: 10px;
+    }
+
+    .options label.correct {
+        background-color: #d4edda !important;
+        border-color: #28a745;
+        color: #155724;
+        font-weight: bold;
+    }
+
+    .options label.incorrect {
+        background-color: #f8d7da !important;
+        border-color: #dc3545;
+        color: #721c24;
+    }
+
+    button {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #1557b0;
+    }
+
+    button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    #result {
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: bold;
+        display: none;
+        background-color: #e2e3e5;
+        color: #383d41;
+        line-height: 1.6;
+    }
+
+    .explanation {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background-color: #edf4fe;
+        border-left: 4px solid #1a73e8;
+        border-radius: 4px;
+        color: #202124;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+</style>
+
+<body>
+    <div class="quiz-container">
+        <h1>វិញ្ញាសាចំណេះដឹងទូទៅ និងវប្បធម៌ទូទៅ</h1>
+        <h2>កម្រងសំណួរជ្រើសរើស (១១១ សំណួរ) សម្រាប់ប្រឡងគ្រូបង្រៀនភាគ៤</h2>
+        <h3>រៀបរៀងដោយ៖ ហួច សេងហុង</h3>
+
+        <div id="timer" class="timer-box">ពេលវេលានៅសល់៖ 45:00</div>
+
+        <form id="quizForm">
+
+
+            <div class="question-block">
+                <div class="question-title">១. «បញ្ញា ជាសម្បទាដែលអាចសម្របទៅនឹងស្ថានការណ៍ថ្មីៗ» នេះជាទស្សនៈរបស់លោកអ្នកណា
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="A"> A. លោក ក្លាប៉ារ៉ែត</label>
+                    <label><input type="radio" name="q1" value="B"> B. លោក ដេកាត</label>
+                    <label><input type="radio" name="q1" value="C"> C. លោក សូក្រាត</label>
+                </div>
+                <div class="explanation" id="exp-q1"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២. មនុស្សដែលដឹងខុសត្រូវ ស្គាល់ល្អអាក្រក់ ហើយប្រព្រឹត្តតែអំពើល្អ
+                    តែខ្លួនស្ថិតនៅក្រោមបង្គាប់គេ។ ជននោះគេចាត់ទុកជាមនុស្សមានអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="A"> A. ភាពជាអ្នកដឹកនាំ</label>
+                    <label><input type="radio" name="q2" value="B"> B. ទំនួលខុសត្រូវ</label>
+                    <label><input type="radio" name="q2" value="C"> C. សេរីភាពពេញលេញ</label>
+                </div>
+                <div class="explanation" id="exp-q2"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣. កាលណាខ្ញុំរអិលដួល ខ្ញុំទទួលបាននូវរំញោចបែបណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="A"> A. មេកានិច</label>
+                    <label><input type="radio" name="q3" value="B"> B. គីមី</label>
+                    <label><input type="radio" name="q3" value="C"> C. ជីវវិទ្យា</label>
+                </div>
+                <div class="explanation" id="exp-q3"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤. ជនដែលមានពុទ្ធិសកល មានសមត្ថភាពបរិបូរពោរពេញទៅដោយគុណធម៌
+                    ហើយមានសុភវិនិច្ឆ័យច្បាស់លាស់
+                    ជននោះចាត់ទុកជា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="A"> A. វិស្វករ</label>
+                    <label><input type="radio" name="q4" value="B"> B. បណ្ឌិត</label>
+                    <label><input type="radio" name="q4" value="C"> C. សាស្ត្រាចារ្យ</label>
+                </div>
+                <div class="explanation" id="exp-q4"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥. ឥន្ទ្រីយារម្មណ៍ចាប់ផ្ដើមឡើងដោយរំញោចនៅក្នុងដំណាក់កាលណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="A"> A. ដំណាក់រូបវិទ្យា</label>
+                    <label><input type="radio" name="q5" value="B"> B. ដំណាក់សរីរវិទ្យា</label>
+                    <label><input type="radio" name="q5" value="C"> C. ដំណាក់ចិត្តវិទ្យា</label>
+                </div>
+                <div class="explanation" id="exp-q5"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦. ជនដែលប្រព្រឹត្តអំពើអ្វីមួយទៅលើអ្នកដទៃ ដោយបំផ្លាញទ្រព្យសម្បត្តិអ្នកដទៃ
+                    ជននោះត្រូវមានទោសទាក់ទងនឹងផ្នែកណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="A"> A. ផ្នែកព្រហ្មទណ្ឌ</label>
+                    <label><input type="radio" name="q6" value="B"> B. ផ្នែករដ្ឋប្បវេណី</label>
+                    <label><input type="radio" name="q6" value="C"> C. ផ្នែករដ្ឋបាល</label>
+                </div>
+                <div class="explanation" id="exp-q6"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧. ទំនោរបំប្លែងនូវភាព ឬការភូតកុហក គេហៅថាជា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="A"> A. ទំនោរខាងសីលធម៌នយោបាយ</label>
+                    <label><input type="radio" name="q7" value="B"> B. ទំនោរខាងសោភ័ណភាព</label>
+                    <label><input type="radio" name="q7" value="C"> C. ទំនោរខាងវិទ្យាសាស្ត្រ</label>
+                </div>
+                <div class="explanation" id="exp-q7"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨. តើបញ្ញាទ្រឹស្ដីកើតមានឡើងតែចំពោះសភាវៈណាខ្លះ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="A"> A. មនុស្ស និងសត្វ</label>
+                    <label><input type="radio" name="q8" value="B"> B. មនុស្សប៉ុណ្ណោះ</label>
+                    <label><input type="radio" name="q8" value="C"> C. សត្វធាតុទាំងឡាយ</label>
+                </div>
+                <div class="explanation" id="exp-q8"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩. កត្តាណែនាំឲ្យមានការបង្កើតថ្មីដែលជានិស្ស័យពីកំណើត ហៅថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="A"> A. កត្តាភាពនៃទេពកោសល្យ</label>
+                    <label><input type="radio" name="q9" value="B"> B. កត្តាបរិស្ថានជុំវិញ</label>
+                    <label><input type="radio" name="q9" value="C"> C. កត្តាការអប់រំទូទៅ</label>
+                </div>
+                <div class="explanation" id="exp-q9"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០. នៅពេលកើតមកភ្លាម មនុស្សស្ថិតនៅក្នុងភាពជាអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="A"> A. សភាវគតិ</label>
+                    <label><input type="radio" name="q10" value="B"> B. ឆន្ទៈ</label>
+                    <label><input type="radio" name="q10" value="C"> C. បញ្ញាស្មារតី</label>
+                </div>
+                <div class="explanation" id="exp-q10"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១១. អំពើដែលកើតឡើងដោយមិនបានព្រាងទុកជាមុន ហៅថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="A"> A. អំពើទម្លាប់</label>
+                    <label><input type="radio" name="q11" value="B"> B. អំពើឆន្ទៈ</label>
+                    <label><input type="radio" name="q11" value="C"> C. អំពើសភាវគតិ</label>
+                </div>
+                <div class="explanation" id="exp-q11"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១២. នៅពេលប្រឡងប្រណាំង មនុស្សគ្រប់រូបតែងតែមានបំណងចង់ឈ្នះដាច់គេ
+                    ហើយទទួលបានលេខមួយ
+                    នេះជាទំនោរ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="A"> A. វិជ្ជាជីវៈ</label>
+                    <label><input type="radio" name="q12" value="B"> B. ឯកជន</label>
+                    <label><input type="radio" name="q12" value="C"> C. សង្គម</label>
+                </div>
+                <div class="explanation" id="exp-q12"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១៣. សតិពិសេសមួយដែលអាចឲ្យយើងគិតជាគំនិតទូទៅ ឬជាបញ្ញត្តិអរូបី
+                    ដោយមានភាសាជំនួយហៅថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="A"> A. បញ្ញាអនុវត្ត</label>
+                    <label><input type="radio" name="q13" value="B"> B. បញ្ញាទ្រឹស្តី</label>
+                    <label><input type="radio" name="q13" value="C"> C. សភាវគតិ</label>
+                </div>
+                <div class="explanation" id="exp-q13"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១៤. សាសនាដែលដឹកនាំមនុស្សឲ្យមានជំនឿលើខ្លួនឯង ហើយជៀសវាងកុំឲ្យមានជំនឿលើភាពអរូបី
+                    គឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="A"> A. ព្រហ្មញ្ញសាសនា</label>
+                    <label><input type="radio" name="q14" value="B"> B. សាសនាព្រះពុទ្ធ</label>
+                    <label><input type="radio" name="q14" value="C"> C. គ្រិស្តសាសនា</label>
+                </div>
+                <div class="explanation" id="exp-q14"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១៥. សាសនាដែលដឹកនាំមនុស្សឲ្យមានជំនឿលើអាទិទេព ហើយរាល់កំហុសដែលមនុស្សបានធ្វើ
+                    គឺព្រះព្រមទទួលយក គឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="A"> A. គ្រិស្តសាសនា</label>
+                    <label><input type="radio" name="q15" value="B"> B. ព្រះពុទ្ធសាសនា</label>
+                    <label><input type="radio" name="q15" value="C"> C. ឥស្លាមសាសនា</label>
+                </div>
+                <div class="explanation" id="exp-q15"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១៦. តើព្រះពុទ្ធសាសនាត្រូវបាននាំចូលមកប្រទេសកម្ពុជាយើងនៅក្នុងកំឡុងពេលណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="A"> A. សតវត្សទី១ មុនគ.ស.</label>
+                    <label><input type="radio" name="q16" value="B"> B. សតវត្សទី២ នៃគ.ស.</label>
+                    <label><input type="radio" name="q16" value="C"> C. សតវត្សទី៥ នៃគ.ស.</label>
+                </div>
+                <div class="explanation" id="exp-q16"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១៧. បើយោងតាមប្រវត្តិពិត ព្រះពុទ្ធសាសនាមានដើមកំណើតបង្កើតឡើងមកពីសភាវៈណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="A"> A. អាទិទេព</label>
+                    <label><input type="radio" name="q17" value="B"> B. មនុស្ស</label>
+                    <label><input type="radio" name="q17" value="C"> C. ទេវតា</label>
+                </div>
+                <div class="explanation" id="exp-q17"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១៨. សាសនាដែលលើកយកការផ្សំធាតុដី ទឹក ភ្លើង និងធាតុខ្យល់ មកពន្យល់ពីកំណើតភាវៈ គឺ
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="A"> A. សាសនាព្រះពុទ្ធ</label>
+                    <label><input type="radio" name="q18" value="B"> B. គ្រិស្តសាសនា</label>
+                    <label><input type="radio" name="q18" value="C"> C. ព្រហ្មញ្ញសាសនា</label>
+                </div>
+                <div class="explanation" id="exp-q18"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១៩. ទ្រឹស្តីព្រះពុទ្ធដែលបានចែងថា ការមិនបៀតបៀន ការមិនប្រទូស្តសារ៉ាយដល់អ្នកដទៃ
+                    គឺជាការធ្វើអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="A"> A. អំពើល្អតាមផ្លូវកាយ</label>
+                    <label><input type="radio" name="q19" value="B"> B. អំពើល្អតាមផ្លូវចិត្ត</label>
+                    <label><input type="radio" name="q19" value="C"> C. អំពើល្អតាមផ្លូវវាចា</label>
+                </div>
+                <div class="explanation" id="exp-q19"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២០. នៅក្នុងតំបន់អាស៊ីអាគ្នេយ៍ ព្រះពុទ្ធសាសនាហីនយាន (ថេរវាទ)
+                    មានឥទ្ធិពលខ្លាំងខ្លាជាងគេនៅក្នុងប្រទេសណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="A"> A. កម្ពុជា</label>
+                    <label><input type="radio" name="q20" value="B"> B. វៀតណាម</label>
+                    <label><input type="radio" name="q20" value="C"> C. ម៉ាឡេស៊ី</label>
+                </div>
+                <div class="explanation" id="exp-q20"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២១.
+                    មហាសន្និបាតអង្គការសហប្រជាជាតិបានប្រកាសសេចក្ដីថ្លែងការណ៍ជាសាកលស្តីពីសិទ្ធិមនុស្សនៅក្នុងថ្ងៃខែឆ្នាំណា
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q21" value="A"> A. ថ្ងៃទី២៤ តុលា ១៩៤៥</label>
+                    <label><input type="radio" name="q21" value="B"> B. ថ្ងៃទី១០ ធ្នូ ១៩៤៨</label>
+                    <label><input type="radio" name="q21" value="C"> C. ថ្ងៃទី១៥ តុលា ១៩៩២</label>
+                </div>
+                <div class="explanation" id="exp-q21"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២២. តើជនជាតិភាគតិចណាខ្លះដែលស្ថិតនៅក្នុងក្រុមជនជាតិភាគតិចអំបូរមន-ខ្មែរ ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q22" value="A"> A. ជនជាតិចាម</label>
+                    <label><input type="radio" name="q22" value="B"> B. ជនជាតិគ្រឹង</label>
+                    <label><input type="radio" name="q22" value="C"> C. ជនជាតិចិន</label>
+                </div>
+                <div class="explanation" id="exp-q22"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២៣. របបកម្ពុជាប្រជាធិបតេយ្យ (ខ្មែរក្រហម)
+                    បានគ្រប់គ្រងប្រទេសកម្ពុជានៅក្នុងកំឡុងឆ្នាំណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q23" value="A"> A. ឆ្នាំ ១៩៧០ - ១៩៧៥</label>
+                    <label><input type="radio" name="q23" value="B"> B. ឆ្នាំ ១៩៧៥ - ១៩៧៩</label>
+                    <label><input type="radio" name="q23" value="C"> C. ឆ្នាំ ១៩៧៩ - ១៩៨៩</label>
+                </div>
+                <div class="explanation" id="exp-q23"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២៤. ប្រទេសកម្ពុជាបានផ្តល់សច្ចាប័នលើអនុសញ្ញាស្តីពីសិទ្ធិកុមារនៅថ្ងៃខែឆ្នាំណា
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q24" value="A"> A. ថ្ងៃទី១៥ តុលា ១៩៩២</label>
+                    <label><input type="radio" name="q24" value="B"> B. ថ្ងៃទី១០ ធ្នូ ១៩៤៨</label>
+                    <label><input type="radio" name="q24" value="C"> C. ថ្ងៃទី២៦ មិថុនា ១៩៤៥</label>
+                </div>
+                <div class="explanation" id="exp-q24"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២៥. អង្គការសហប្រជាជាតិ (UN) ត្រូវបានបង្កើតឡើងជាផ្លូវការនៅថ្ងៃខែឆ្នាំណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q25" value="A"> A. ថ្ងៃទី២៦ មិថុនា ១៩៤៥</label>
+                    <label><input type="radio" name="q25" value="B"> B. ថ្ងៃទី២៤ តុលា ១៩៤៥</label>
+                    <label><input type="radio" name="q25" value="C"> C. ថ្ងៃទី១០ ធ្នូ ១៩៤៨</label>
+                </div>
+                <div class="explanation" id="exp-q25"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២៦. ព្រះពុទ្ធសាសនាបានកើតឡើងនៅពេលដែលព្រះសមណគោតមទ្រង់ធ្វើអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q26" value="A"> A. ទ្រង់ប្រសូត្រ</label>
+                    <label><input type="radio" name="q26" value="B"> B. ចូលនិព្វាន</label>
+                    <label><input type="radio" name="q26" value="C"> C. ត្រាស់ដឹង</label>
+                </div>
+                <div class="explanation" id="exp-q26"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២៧. ជនជាតិផ្សេងៗដែលស្នាក់អាស្រ័យប្រកបមុខរបរក្នុងប្រទេសណាមួយ គេហៅថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q27" value="A"> A. ជនភៀសខ្លួន</label>
+                    <label><input type="radio" name="q27" value="B"> B. អាណិកជន</label>
+                    <label><input type="radio" name="q27" value="C"> C. ជនជាតិដើមភាគតិច</label>
+                </div>
+                <div class="explanation" id="exp-q27"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២៨. ក្នុងចំណោមព្រហ្មវិហារធម៌ទាំង៤ ធម៌ដែលអប់រំមនុស្សឲ្យចេះស្រឡាញ់រាប់អានគ្នា
+                    គ្មានការរើសអើង គឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q28" value="A"> A. មេត្តា</label>
+                    <label><input type="radio" name="q28" value="B"> B. ករុណា</label>
+                    <label><input type="radio" name="q28" value="C"> C. មុទិតា</label>
+                </div>
+                <div class="explanation" id="exp-q28"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២៩. សេចក្តីសុខដែលកើតចេញពីការប្រព្រឹត្តតាមគន្លងធម៌
+                    ដូចជាការប្រកបមុខរបរសុចរិតក្នុងការរកទ្រព្យសម្បត្តិ ព្រះពុទ្ធហៅថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q29" value="A"> A. សម្មាសង្កប្បោ</label>
+                    <label><input type="radio" name="q29" value="B"> B. សម្មាអាជីវោ</label>
+                    <label><input type="radio" name="q29" value="C"> C. សម្មាវាយាមោ</label>
+                </div>
+                <div class="explanation" id="exp-q29"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣០. ពេលវេលាចូលព្រះវស្សាសម្រាប់ព្រះសង្ឃក្នុងព្រះពុទ្ធសាសនា
+                    មានរយៈពេលប៉ុន្មានខែ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q30" value="A"> A. ២ ខែ</label>
+                    <label><input type="radio" name="q30" value="B"> B. ៣ ខែ</label>
+                    <label><input type="radio" name="q30" value="C"> C. ៤ ខែ</label>
+                </div>
+                <div class="explanation" id="exp-q30"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣១. ការធ្វើជំរឿនទូទៅប្រជាជននៅកម្ពុជាកាលពីឆ្នាំ២០០៨ ធ្វើឡើងនៅក្នុងកំឡុងពេលណា
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q31" value="A"> A. ថ្ងៃទី០១-១០ ខែមករា</label>
+                    <label><input type="radio" name="q31" value="B"> B. ថ្ងៃទី០៣-១៣ ខែមីនា</label>
+                    <label><input type="radio" name="q31" value="C"> C. ថ្ងៃទី០៣-១៣ ខែមីនា ឆ្នាំ២០១៩</label>
+                </div>
+                <div class="explanation" id="exp-q31"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣២. តើការរៀបចំ និងធ្វើជំរឿនប្រជាជនស្ថិតនៅក្រោមសមត្ថកិច្ចរបស់ស្ថាប័នណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q32" value="A"> A. ក្រសួងមហាផ្ទៃ</label>
+                    <label><input type="radio" name="q32" value="B"> B. ក្រសួងផែនការ</label>
+                    <label><input type="radio" name="q32" value="C"> C. ក្រសួងសេដ្ឋកិច្ច និងហិរញ្ញវត្ថុ</label>
+                </div>
+                <div class="explanation" id="exp-q32"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣៣. រដ្ឋធម្មនុញ្ញនៃព្រះរាជាណាចក្រកម្ពុជា (ចុងក្រោយ)
+                    ត្រូវបានប្រកាសឱ្យប្រើប្រាស់ជាផ្លូវការនៅថ្ងៃណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q33" value="A"> A. ថ្ងៃទី២៤ កញ្ញា ១៩៩៣</label>
+                    <label><input type="radio" name="q33" value="B"> B. ថ្ងៃទី០៩ វិច្ឆិកា ១៩៥៣</label>
+                    <label><input type="radio" name="q33" value="C"> C. ថ្ងៃទី០៧ មករា ១៩៧៩</label>
+                </div>
+                <div class="explanation" id="exp-q33"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣៤. តើប្រព័ន្ធច្បាប់
+                    និងតុលាការនៅកម្ពុជាត្រូវបានគេបំផ្លាញចោលទាំងស្រុងនៅក្នុងកំឡុងឆ្នាំណា
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q34" value="A"> A. ឆ្នាំ ១៩៧០-១៩៧៥</label>
+                    <label><input type="radio" name="q34" value="B"> B. ឆ្នាំ ១៩៧៥–១៩៧៩</label>
+                    <label><input type="radio" name="q34" value="C"> C. ឆ្នាំ ១៩៧៩-១៩៩៣</label>
+                </div>
+                <div class="explanation" id="exp-q34"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣៥. កាលបើមានវិវាទធ្ងន់ធ្ងរលើសសមត្ថកិច្ច គ.ជ.ប. ដោះស្រាយបាន
+                    តើស្ថាប័នណាដែលមានសិទ្ធិដោះស្រាយចុងក្រោយបង្អស់ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q35" value="A"> A. តុលាការកំពូល</label>
+                    <label><input type="radio" name="q35" value="B"> B. ក្រុមប្រឹក្សារដ្ឋធម្មនុញ្ញ</label>
+                    <label><input type="radio" name="q35" value="C"> C. រដ្ឋសភាជាតិ</label>
+                </div>
+                <div class="explanation" id="exp-q35"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣៦. នៅក្នុងការគ្រប់គ្រងដែនដី តើរដ្ឋបាលមូលដ្ឋាន (ដូចជា ក្រុមប្រឹក្សាឃុំ
+                    សង្កាត់)
+                    មានសិទ្ធិចេញអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q36" value="A"> A. ព្រះរាជក្រម</label>
+                    <label><input type="radio" name="q36" value="B"> B. សេចក្តីសម្រេច ឬ សេចក្តីជូនដំណឹង</label>
+                    <label><input type="radio" name="q36" value="C"> C. អនុក្រឹត្យ</label>
+                </div>
+                <div class="explanation" id="exp-q36"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣៧. បណ្តឹងទាក់ទងនឹងសិទ្ធិឯកជន ឬបណ្តឹងទាមទារឲ្យមានការជួសជុលការខូចខាតសម្ភារៈ
+                    និងសងជំងឺចិត្ត ហៅថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q37" value="A"> A. បណ្តឹងព្រហ្មទណ្ឌ</label>
+                    <label><input type="radio" name="q37" value="B"> B. បណ្តឹងរដ្ឋប្បវេណី</label>
+                    <label><input type="radio" name="q37" value="C"> C. បណ្តឹងរដ្ឋបាល</label>
+                </div>
+                <div class="explanation" id="exp-q37"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣៨. រាល់បទល្មើសទាំងឡាយណាដែលប្រព្រឹត្តឡើងដោយយោធិន (ទាហាន)
+                    ត្រូវទទួលការជំនុំជម្រះនៅឯណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q38" value="A"> A. តុលាការសាលាដំបូងខេត្ត</label>
+                    <label><input type="radio" name="q38" value="B"> B. តុលាការយោធា</label>
+                    <label><input type="radio" name="q38" value="C"> C. សាលាឧទ្ធរណ៍</label>
+                </div>
+                <div class="explanation" id="exp-q38"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៣៩. រាល់សេចក្តីសម្រេចទាំងឡាយរបស់ក្រុមប្រឹក្សារដ្ឋធម្មនុញ្ញ
+                    គឺជាសេចក្តីសម្រេចបែបណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q39" value="A"> A. អាចប្តឹងតវ៉ាទៅតុលាការកំពូលបាន</label>
+                    <label><input type="radio" name="q39" value="B"> B. បិទផ្លូវតវ៉ា (ជាស្ថាពរ
+                        និងមានអានុភាពលើគ្រប់អំណាច)</label>
+                    <label><input type="radio" name="q39" value="C"> C. ត្រូវឆ្លងកាត់ការយល់ព្រមពីនាយករដ្ឋមន្ត្រី</label>
+                </div>
+                <div class="explanation" id="exp-q39"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤០. អំណាចណាដែលមានតួនាទីគ្រប់ដណ្តប់លើរឿងក្ដីទាំងអស់
+                    រួមទាំងរឿងក្ដីរដ្ឋបាលផងនោះ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q40" value="A"> A. អំណាចនីតិប្បញ្ញត្តិ</label>
+                    <label><input type="radio" name="q40" value="B"> B. អំណាចតុលាការ</label>
+                    <label><input type="radio" name="q40" value="C"> C. អំណាចនីតិប្រតិបត្តិ</label>
+                </div>
+                <div class="explanation" id="exp-q40"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤១. របបគ្រប់គ្រងរដ្ឋមួយដែលលើកតម្កើង និងយកប្រជារាស្ត្រជាធំ ហៅថាជា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q41" value="A"> A. របបរាជានិយមផ្តាច់ការ</label>
+                    <label><input type="radio" name="q41" value="B"> B. របបប្រជាធិបតេយ្យ</label>
+                    <label><input type="radio" name="q41" value="C"> C. របបកុម្មុយនីស្ត</label>
+                </div>
+                <div class="explanation" id="exp-q41"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤២. នៅក្នុងគោលការណ៍បែងចែកអំណាច
+                    តើស្ថាប័នណាដែលមាននាទីចម្បងក្នុងការការពាររដ្ឋធម្មនុញ្ញ ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q42" value="A"> A. នីតិប្រតិបត្តិ</label>
+                    <label><input type="radio" name="q42" value="B"> B. នីតិប្បញ្ញត្តិ</label>
+                    <label><input type="radio" name="q42" value="C"> C. អំណាចឯករាជ្យនៃក្រុមប្រឹក្សារដ្ឋធម្មនុញ្ញ</label>
+                </div>
+                <div class="explanation" id="exp-q42"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤៣. បើយោងតាមច្បាប់ តើបេក្ខជនដែលមានសិទ្ធិឈរឈ្មោះជានាយករដ្ឋមន្ត្រីនៃកម្ពុជា
+                    ត្រូវមានអាយុយ៉ាងតិចប៉ុន្មានឆ្នាំ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q43" value="A"> A. យ៉ាងតិច ២១ ឆ្នាំ</label>
+                    <label><input type="radio" name="q43" value="B"> B. យ៉ាងតិច ២៥ ឆ្នាំ</label>
+                    <label><input type="radio" name="q43" value="C"> C. យ៉ាងតិច ٣٥ ឆ្នាំ</label>
+                </div>
+                <div class="explanation" id="exp-q43"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤៤. នៅក្នុងទម្រង់រចនាសម្ព័ន្ធគ្រប់គ្រងរដ្ឋ
+                    គេកំណត់រដ្ឋបាលកណ្តាលដោយគោលការណ៍អ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q44" value="A"> A. វិបជ្ឈការ</label>
+                    <label><input type="radio" name="q44" value="B"> B. បជ្ឈការ</label>
+                    <label><input type="radio" name="q44" value="C"> C. សហការ</label>
+                </div>
+                <div class="explanation" id="exp-q44"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤៥. រីឯការគ្រប់គ្រងរដ្ឋបាលថ្នាក់ក្រោមជាតិ ឬរដ្ឋបាលមូលដ្ឋាន
+                    គេកំណត់ដោយគោលការណ៍អ្វី ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q45" value="A"> A. បជ្ឈការ</label>
+                    <label><input type="radio" name="q45" value="B"> B. វិបជ្ឈការ</label>
+                    <label><input type="radio" name="q45" value="C"> C. ឯកជ្ឈការ</label>
+                </div>
+                <div class="explanation" id="exp-q45"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤៦. ជំរឿនដំបូងនៅកម្ពុជាដែលធ្វើឡើងដោយអាណានិគមបារាំងក្នុងឆ្នាំ១៩២១
+                    ធ្វើឡើងក្នុងគោលបំណងអ្វី
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q46" value="A"> A. ផ្តល់ដីធ្លីជូនប្រជាជន</label>
+                    <label><input type="radio" name="q46" value="B"> B. ប្រមូលពន្ធដារ</label>
+                    <label><input type="radio" name="q46" value="C"> C. ជ្រើសរើសកងទ័ព</label>
+                </div>
+                <div class="explanation" id="exp-q46"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤៧. ផ្ទុយទៅវិញ ការធ្វើជំរឿននៅប្រទេសកម្ពុជានាឆ្នាំ២០០៨ និងសម័យក្រោយៗ
+                    គឺធ្វើឡើងក្នុងបំណងអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q47" value="A"> A. រាប់ចំនួនប្រជាជន
+                        និងប្រមូលទិន្នន័យដើម្បីអភិវឌ្ឍន៍</label>
+                    <label><input type="radio" name="q47" value="B"> B. ត្រៀមចែកស្បៀងអាហារ</label>
+                    <label><input type="radio" name="q47" value="C"> C. កំណត់មុខសញ្ញាដើម្បីយកពន្ធ</label>
+                </div>
+                <div class="explanation" id="exp-q47"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤៨. ជាទូទៅ គេកំណត់រយៈពេលនៃការធ្វើជំរឿនប្រជាជនក្នុងប្រទេសមួយ
+                    ចំនួនប៉ុន្មានឆ្នាំម្តង ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q48" value="A"> A. ៥ ឆ្នាំម្តង</label>
+                    <label><input type="radio" name="q48" value="B"> B. ១០ ឆ្នាំម្ដង</label>
+                    <label><input type="radio" name="q48" value="C"> C. ២០ ឆ្នាំម្តង</label>
+                </div>
+                <div class="explanation" id="exp-q48"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៤៩. មន្ត្រីដែលធ្វើការនៅក្នុងរដ្ឋបាលឃុំ ដែលមានឋានៈបន្ទាប់ពីមេឃុំ
+                    គេហៅថាដូចម្តេច ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q49" value="A"> A. ស្មៀនឃុំ</label>
+                    <label><input type="radio" name="q49" value="B"> B. ជំទប់</label>
+                    <label><input type="radio" name="q49" value="C"> C. មេភូមិ</label>
+                </div>
+                <div class="explanation" id="exp-q49"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥០. ព្រះមហាក្សត្រទ្រង់ឡាយព្រះហស្តលេខាលើ «ព្រះរាជក្រឹត្យ» ដើម្បីគោលបំណងអ្វី ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q50" value="A"> A. បង្កើតច្បាប់រដ្ឋប្បវេណីថ្មី</label>
+                    <label><input type="radio" name="q50" value="B"> B. តែងតាំង ឬដកហូតងារឧត្តមមន្ត្រី</label>
+                    <label><input type="radio" name="q50" value="C"> C. ប្រកាសសង្គ្រាមជាផ្លូវការ</label>
+                </div>
+                <div class="explanation" id="exp-q50"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥១. ជនជាប់ចោទដែលតុលាការបានសម្រេចផ្តន្ទាទោសដាក់ពន្ធនាគារ តាមរយៈសាលក្រមស្ថាពរ
+                    (បិទផ្លូវតវ៉ា) រួចហើយ គេហៅជននោះថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q51" value="A"> A. ពិរុទ្ធជន</label>
+                    <label><input type="radio" name="q51" value="B"> B. ទណ្ឌិត</label>
+                    <label><input type="radio" name="q51" value="C"> C. ជនសង្ស័យ</label>
+                </div>
+                <div class="explanation" id="exp-q51"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥២. នៅក្នុងប្រព័ន្ធតុលាការកម្ពុជា តើចៅក្រម និងព្រះរាជអាជ្ញា
+                    ត្រូវតែងតាំងឡើងដោយអ្នកណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q52" value="A"> A. នាយករដ្ឋមន្ត្រី</label>
+                    <label><input type="radio" name="q52" value="B"> B. ព្រះមហាក្សត្រ (តាមរយៈព្រះរាជក្រឹត្យ)</label>
+                    <label><input type="radio" name="q52" value="C"> C. ប្រធានរដ្ឋសភា</label>
+                </div>
+                <div class="explanation" id="exp-q52"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥៣. រដ្ឋបាលខេត្ត និងរាជធានីនៃព្រះរាជាណាចក្រកម្ពុជា
+                    ជាស្ថាប័នថ្នាក់ក្រោមជាតិដែលចំណុះឱ្យក្រសួងណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q53" value="A"> A. ក្រសួងការពារជាតិ</label>
+                    <label><input type="radio" name="q53" value="B"> B. ក្រសួងមហាផ្ទៃ</label>
+                    <label><input type="radio" name="q53" value="C"> C. ក្រសួងយុត្តិធម៌</label>
+                </div>
+                <div class="explanation" id="exp-q53"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥៤. យុត្តិធម៌ត្រូវបានស្វែងរកតាមរយៈចៅក្រម
+                    ហើយការដោះស្រាយវិវាទក្រៅប្រព័ន្ធតុលាការមួយចំនួន
+                    គឺត្រូវឈរលើគោលការណ៍អ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q54" value="A"> A. ការបង្ខិតបង្ខំ</label>
+                    <label><input type="radio" name="q54" value="B"> B. ការយោគយល់ ឬការសម្រុះសម្រួល</label>
+                    <label><input type="radio" name="q54" value="C"> C. យុត្តិធម៌បែបកាត់កាល</label>
+                </div>
+                <div class="explanation" id="exp-q54"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥៥. ជនដែលបានញុះញង់ ជួយទំនុកបម្រុង ផ្តល់មធ្យោបាយ
+                    ឬជួយសម្រួលឱ្យគេប្រព្រឹត្តបទល្មើស ហៅថាជា
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q55" value="A"> A. ចារី (អ្នកប្រព្រឹត្តផ្ទាល់)</label>
+                    <label><input type="radio" name="q55" value="B"> B. ជនផ្សំគំនិត</label>
+                    <label><input type="radio" name="q55" value="C"> C. សហចារី</label>
+                </div>
+                <div class="explanation" id="exp-q55"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥៦. អ្នកចូលរួមប្រព្រឹត្តបទល្មើសដែលមានឆន្ទៈដូចគ្នាជាមួយចារី
+                    ហើយមានវត្តមានជាមួយគ្នានៅកន្លែងកើតហេតុ ហៅថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q56" value="A"> A. ជនផ្សំគំនិត</label>
+                    <label><input type="radio" name="q56" value="B"> B. សហចារី (អ្នករួមប្រព្រឹត្តបទល្មើស)</label>
+                    <label><input type="radio" name="q56" value="C"> C. សាក្សី</label>
+                </div>
+                <div class="explanation" id="exp-q56"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥៧. នៅក្នុងនីតិវិធីតុលាការ ការប្តឹងបដិសេធមិនព្រមទទួលយកសាលក្រម ឬសាលដីកា
+                    ដើម្បីសុំជំនុំជម្រះឡើងវិញ គឺជា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q57" value="A"> A. បណ្តឹងអាជ្ញា</label>
+                    <label><input type="radio" name="q57" value="B"> B. បណ្តឹងតវ៉ា ឬបណ្តឹងឧទ្ធរណ៍</label>
+                    <label><input type="radio" name="q57" value="C"> C. បណ្តឹងរដ្ឋបាល</label>
+                </div>
+                <div class="explanation" id="exp-q57"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥៨. ដំណើរការប្តឹងផ្តល់ដើម្បីទាមទារជំងឺចិត្ត ឬថ្លៃខូចខាតពីភាគីម្ខាងទៀត
+                    គឺជាប្រភេទ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q58" value="A"> A. បណ្តឹងអាជ្ញាអាជ្ញាកណ្តាល</label>
+                    <label><input type="radio" name="q58" value="B"> B. បណ្តឹងរដ្ឋប្បវេណី</label>
+                    <label><input type="radio" name="q58" value="C"> C. បណ្តឹងព្រហ្មទណ្ឌ</label>
+                </div>
+                <div class="explanation" id="exp-q58"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥៩. បណ្ដឹងដែលប្តឹងអំពីករណីមន្ត្រីរាជការប្រព្រឹត្តអំពើពុករលួយ
+                    ឬខុសឆ្គងនឹងវិន័យការងារ គឺជា
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q59" value="A"> A. បណ្តឹងព្រហ្មទណ្ឌ</label>
+                    <label><input type="radio" name="q59" value="B"> B. បណ្តឹងរដ្ឋបាល</label>
+                    <label><input type="radio" name="q59" value="C"> C. បណ្តឹងឯកជន</label>
+                </div>
+                <div class="explanation" id="exp-q59"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦០. ទំនាស់ដែលកើតឡើងរវាងភាគីឯកជន និងស្ថាប័នរាជការ (រដ្ឋបាលសាធារណៈ) នាំឱ្យមាន
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q60" value="A"> A. បណ្ដឹងតវ៉ា (ឬបណ្តឹងរដ្ឋបាលតវ៉ា)</label>
+                    <label><input type="radio" name="q60" value="B"> B. បណ្តឹងព្រហ្មទណ្ឌទូទៅ</label>
+                    <label><input type="radio" name="q60" value="C"> C. បណ្តឹងកិច្ចសន្យាពាណិជ្ជកម្ម</label>
+                </div>
+                <div class="explanation" id="exp-q60"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦១. នៅក្នុងដំណើរការច្បាប់ ការប្តឹងពីករណីមានការរំលោភលើសិទ្ធិបុគ្គល គេហៅថា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q61" value="A"> A. បណ្តឹងរដ្ឋបាល</label>
+                    <label><input type="radio" name="q61" value="B"> B. បណ្តឹងបរិហារ</label>
+                    <label><input type="radio" name="q61" value="C"> C. បណ្តឹងទាស់</label>
+                </div>
+                <div class="explanation" id="exp-q61"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦២. ជនដែលស្ថិតក្នុងដំណើរការនីតិវិធីច្បាប់ និងកំពុងរង់ចាំការកាត់ក្ដីពីតុលាការ
+                    គេហៅថា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q62" value="A"> A. ពិរុទ្ធជន</label>
+                    <label><input type="radio" name="q62" value="B"> B. ជនជាប់ចោទ</label>
+                    <label><input type="radio" name="q62" value="C"> C. សាក្សី</label>
+                </div>
+                <div class="explanation" id="exp-q62"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦៣. ជនដែលត្រូវបានចោទប្រកាន់
+                    ប៉ុន្តែតុលាការមិនទាន់បានធ្វើការជំនុំជម្រះក្តីនៅឡើយ គេហៅថា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q63" value="A"> A. ទណ្ឌិត</label>
+                    <label><input type="radio" name="q63" value="B"> B. ជនជាប់ចោទ</label>
+                    <label><input type="radio" name="q63" value="C"> C. ពិរុទ្ធជន</label>
+                </div>
+                <div class="explanation" id="exp-q63"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦៤. ជនដែលតុលាការបានជំនុំជម្រះ
+                    និងចេញសាលក្រមស្ថាពរផ្តន្ទាទោសដាក់ពន្ធនាគាររួចហើយ គេហៅថា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q64" value="A"> A. ជនសង្ស័យ</label>
+                    <label><input type="radio" name="q64" value="B"> B. ទណ្ឌិត</label>
+                    <label><input type="radio" name="q64" value="C"> C. ជនជាប់ចោទ</label>
+                </div>
+                <div class="explanation" id="exp-q64"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦៥. តើបន្ទាយលង្វែកត្រូវបានកសាងឡើងដោយស្នាព្រះហស្ថរបស់ព្រះមហាក្សត្រអង្គណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q65" value="A"> A. ព្រះបាទពញាយ៉ាត</label>
+                    <label><input type="radio" name="q65" value="B"> B. ព្រះបាទចន្ទរាជា</label>
+                    <label><input type="radio" name="q65" value="C"> C. ព្រះបាទស្រីសុរិយោពណ៌</label>
+                </div>
+                <div class="explanation" id="exp-q65"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦៦. តើព្រះរាជាខ្មែរអង្គណាដែលបានយាងមកតាំងរាជធានីនៅតំបន់ឧដុង្គដំបូងគេបង្អស់ ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q66" value="A"> A. ព្រះបាទស្រីសុរិយោពណ៌</label>
+                    <label><input type="radio" name="q66" value="B"> B. ព្រះបាទអង្គឌួង</label>
+                    <label><input type="radio" name="q66" value="C"> C. ព្រះបាទជ័យជេដ្ឋាទី២</label>
+                </div>
+                <div class="explanation" id="exp-q66"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦៧. ព្រះរាជាខ្មែរដែលបានខិតខំស្តារវប្បធម៌
+                    និងប្រទេសជាតិឱ្យខ្ពង់ខ្ពស់ឡើងវិញនៅចុងសម័យឧដុង្គ
+                    គឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q67" value="A"> A. ព្រះបាទនរោត្តម</label>
+                    <label><input type="radio" name="q67" value="B"> B. ព្រះបាទអង្គឌួង</label>
+                    <label><input type="radio" name="q67" value="C"> C. ព្រះបាទចន្ទរាជា</label>
+                </div>
+                <div class="explanation" id="exp-q67"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦៨. នៅក្នុងសម័យចតុមុខ តើព្រះរាជាអង្គណាដែលបានក្បត់ចូលដៃជាមួយសៀម
+                    ដើម្បីដណ្ដើមរាជ្យមកគ្រងតែអង្គឯង ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q68" value="A"> A. ព្រះបាទធម្មរាជា</label>
+                    <label><input type="radio" name="q68" value="B"> B. ព្រះស្រីសុរិយោវង្ស</label>
+                    <label><input type="radio" name="q68" value="C"> C. ព្រះបាទពញាយ៉ាត</label>
+                </div>
+                <div class="explanation" id="exp-q68"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៦៩. បើយោងតាមប្រវត្តិសាស្ត្រ តើជនជាតិខ្មែរមានដើមកំណើតមកពីអំបូរអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q69" value="A"> A. អំបូរចាម-ជ្វា</label>
+                    <label><input type="radio" name="q69" value="B"> B. អំបូរខ្មែរ-មន (ឬមន-ខ្មែរ)</label>
+                    <label><input type="radio" name="q69" value="C"> C. អំបូរថៃ-ឡាវ</label>
+                </div>
+                <div class="explanation" id="exp-q69"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧០. ប្រទេសបារាំងបានចូលមកធ្វើជាអាណាព្យាបាលលើប្រទេសកម្ពុជា
+                    នៅក្នុងរជ្ជកាលស្តេចអង្គណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q70" value="A"> A. ព្រះបាទអង្គឌួង</label>
+                    <label><input type="radio" name="q70" value="B"> B. ព្រះបាទនរោត្តម</label>
+                    <label><input type="radio" name="q70" value="C"> C. ព្រះបាទស៊ីសុវត្ថិ</label>
+                </div>
+                <div class="explanation" id="exp-q70"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧១. តើព្រះបាទជ័យវរ្ម័នទី៧ ព្រះអង្គប្រសូត្រ និងសោយទិវង្គតនៅក្នុងឆ្នាំណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q71" value="A"> A. ប្រសូត្រឆ្នាំ ១១២៥ និងសុគតឆ្នាំ ១២១៨</label>
+                    <label><input type="radio" name="q71" value="B"> B. ប្រសូត្រឆ្នាំ ១១១២ និងសុគតឆ្នាំ ១១៨១</label>
+                    <label><input type="radio" name="q71" value="C"> C. ប្រសូត្រឆ្នាំ ១១៨១ និងសុគតឆ្នាំ ១២០១</label>
+                </div>
+                <div class="explanation" id="exp-q71"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧២. តើព្រះបិតា និងព្រះមាតារបស់ព្រះបាទជ័យវរ្ម័នទី៧ មានព្រះនាមដូចម្តេចខ្លះ ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q72" value="A"> A. ព្រះបិតានាម សូរ្យវរ្ម័នទី២ និងមាតានាម
+                        ជ័យរាជទេវី</label>
+                    <label><input type="radio" name="q72" value="B"> B. ព្រះបិតានាម ធរណីន្ទ្រវរ្ម័នទី២ និងមាតានាម
+                        សុដាមណី</label>
+                    <label><input type="radio" name="q72" value="C"> C. ព្រះបិតានាម យសោវរ្ម័នទី១ និងមាតានាម
+                        ឥន្ទ្រទេវី</label>
+                </div>
+                <div class="explanation" id="exp-q72"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧៣. តើព្រះបាទជ័យវរ្ម័នទី៧ បានឡើងគ្រងរាជសម្បត្តិជាផ្លូវការនៅក្នុងឆ្នាំណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q73" value="A"> A. ឆ្នាំ ១១៧៧</label>
+                    <label><input type="radio" name="q73" value="B"> B. ឆ្នាំ ១១៨១</label>
+                    <label><input type="radio" name="q73" value="C"> C. ឆ្នាំ ១២១៥</label>
+                </div>
+                <div class="explanation" id="exp-q73"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧៤. ព្រះបាទជ័យវរ្ម័នទី៧ មានអគ្គមហេសីចំនួន ២ ព្រះអង្គ
+                    (ជាបងប្អូនបង្កើតនឹងគ្នា)
+                    ដែលមានព្រះនាមថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q74" value="A"> A. ព្រះនាងជ័យរាជទេវី (មហេសីទី១-ប្អូន)
+                        និងព្រះនាងឥន្ទ្រទេវី
+                        (មហេសីទី២-បង)</label>
+                    <label><input type="radio" name="q74" value="B"> B. ព្រះនាងសោម៉ា និងព្រះនាងកែវចរណី</label>
+                    <label><input type="radio" name="q74" value="C"> C. ព្រះនាងទេវី និងព្រះនាងសុដាមណី</label>
+                </div>
+                <div class="explanation" id="exp-q74"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧៥. តើព្រះបាទជ័យវរ្ម័នទី៧ បានកសាងក្រុងអង្គរជាលើកទីប៉ុន្មាន
+                    នៅត្រង់បរិវេណប្រសាទអង្គរធំ
+                    ឬបាយ័ន ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q75" value="A"> A. លើកទី២ (យសោធរបុរៈ២)</label>
+                    <label><input type="radio" name="q75" value="B"> B. លើកទី៤ (យសោធរបុរៈ៤)</label>
+                    <label><input type="radio" name="q75" value="C"> C. លើកទី៥ (យសោធរបុរៈ៥)</label>
+                </div>
+                <div class="explanation" id="exp-q75"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧៦. តើព្រះបាទជ័យវរ្ម័នទី៧ មានព្រះមរណនាម (នាមក្រោយពេលសោយទិវង្គត) ដូចម្តេច ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q76" value="A"> A. ព្រះបរមវិស្ណុលោក</label>
+                    <label><input type="radio" name="q76" value="B"> B. ព្រះបរមសៅសុគតបទ</label>
+                    <label><input type="radio" name="q76" value="C"> C. ព្រះបរមនិព្វានបទ</label>
+                </div>
+                <div class="explanation" id="exp-q76"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧៧. ព្រះរាជាខ្មែរដែលបានរំដោះជាតិពីអំណាចជ្វា និងបានបង្រួបបង្រួមចេនឡាទឹកលិច
+                    និងចេនឡាដីគោកឱ្យរួមតែមួយ គឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q77" value="A"> A. ព្រះបាទឦសានវរ្ម័នទី១</label>
+                    <label><input type="radio" name="q77" value="B"> B. ព្រះបាទជ័យវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q77" value="C"> C. ព្រះបាទសូរ្យវរ្ម័នទី២</label>
+                </div>
+                <div class="explanation" id="exp-q77"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧៨. តើព្រះបាទជ័យវរ្ម័នទី២ បានប្រកាសឯករាជ្យជាតិ និងឡើងគ្រងរាជ្យនៅឆ្នាំណា
+                    (ដែលជាការចាប់ផ្តើមសម័យអង្គរ) ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q78" value="A"> A. ឆ្នាំ ៦១៦</label>
+                    <label><input type="radio" name="q78" value="B"> B. ឆ្នាំ ៨០២</label>
+                    <label><input type="radio" name="q78" value="C"> C. ឆ្នាំ ៩២៨</label>
+                </div>
+                <div class="explanation" id="exp-q78"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៧៩. ព្រះរាជាដែលបានផ្តើមកសាងក្រុងអង្គរទី១ (យសោធរបុរៈ១) ត្រង់ប្រាសាទភ្នំបាខែង
+                    មានព្រះនាមថា
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q79" value="A"> A. ព្រះបាទជ័យវរ្ម័នទី៤</label>
+                    <label><input type="radio" name="q79" value="B"> B. ព្រះបាទយសោវរ្ម័នទី១</label>
+                    <label><input type="radio" name="q79" value="C"> C. ព្រះបាទរាជេន្ទ្រវរ្ម័ន</label>
+                </div>
+                <div class="explanation" id="exp-q79"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨០. ព្រះរាជាដែលបានផ្តើមកសាងក្រុងអង្គរទី២ (យសោធរបុរៈ២) ត្រង់ប្រាសាទបាពួន
+                    និងសង់បង្ហើយដោយក្សត្របន្ទាប់ គឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q80" value="A"> A. ព្រះបាទសូរ្យវរ្ម័នទី១
+                        និងព្រះបាទឧទយាទិត្យវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q80" value="B"> B. ព្រះបាទជ័យវរ្ម័នទី៧
+                        និងព្រះបាទឥន្ទ្រវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q80" value="C"> C. ព្រះបាទរាជេន្ទ្រវរ្ម័នទី២
+                        និងព្រះបាទជ័យវរ្ម័នទី៥</label>
+                </div>
+                <div class="explanation" id="exp-q80"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨១. ព្រះរាជាដែលបានផ្តើមកសាងក្រុងអង្គរទី៣ (យសោធរបុរៈ៣)
+                    ត្រង់បរិវេណប្រាសាទអង្គរវត្ត
+                    មានព្រះនាមថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q81" value="A"> A. ព្រះបាទសូរ្យវរ្ម័នទី១</label>
+                    <label><input type="radio" name="q81" value="B"> B. ព្រះបាទសូរ្យវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q81" value="C"> C. ព្រះបាទជ័យវរ្ម័នទី៧</label>
+                </div>
+                <div class="explanation" id="exp-q81"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨២. ព្រះរាជាដែលបានផ្តើមកសាងក្រុងអង្គរទី៤ (យសោធរបុរៈ៤)
+                    ត្រង់បរិវេណប្រាសាទបាយ័ន
+                    មានព្រះនាមថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q82" value="A"> A. ព្រះបាទយសោវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q82" value="B"> B. ព្រះបាទជ័យវរ្ម័នទី៧</label>
+                    <label><input type="radio" name="q82" value="C"> C. ព្រះបាទពញាយ៉ាត</label>
+                </div>
+                <div class="explanation" id="exp-q82"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨៣. តើកងទ័ពសៀមបានវាយលុក និងចូលកាន់កាប់ក្រុងអង្គរជាលើកទី១ នៅក្នុងឆ្នាំណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q83" value="A"> A. ឆ្នាំ ១៣៥២</label>
+                    <label><input type="radio" name="q83" value="B"> B. ឆ្នាំ ១៣៩៤</label>
+                    <label><input type="radio" name="q83" value="C"> C. ឆ្នាំ ១៤២០</label>
+                </div>
+                <div class="explanation" id="exp-q83"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨៤. តើកងទ័ពសៀមបានវាយលុក និងចូលកាន់កាប់ក្រុងអង្គរជាលើកទី២ នៅក្នុងឆ្នាំណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q84" value="A"> A. ឆ្នាំ ១៣៥២</label>
+                    <label><input type="radio" name="q84" value="B"> B. ឆ្នាំ ១៣៩៤</label>
+                    <label><input type="radio" name="q84" value="C"> C. ឆ្នាំ ១៤៣១</label>
+                </div>
+                <div class="explanation" id="exp-q84"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨៥. តើកងទ័ពសៀមបានវាយលុក និងចូលកាន់កាប់ក្រុងអង្គរជាលើកទី៣ នៅក្នុងឆ្នាំណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q85" value="A"> A. ឆ្នាំ ១៣៩៤</label>
+                    <label><input type="radio" name="q85" value="B"> B. ឆ្នាំ ១៤២០</label>
+                    <label><input type="radio" name="q85" value="C"> C. ឆ្នាំ ១៤៣១</label>
+                </div>
+                <div class="explanation" id="exp-q85"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨៦. សរុបមក កងទ័ពសៀមបានវាយកាន់កាប់ក្រុងអង្គរចំនួន ៣ លើក នៅក្នុងឆ្នាំណាខ្លះ ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q86" value="A"> A. លើកទី១ ឆ្នាំ១៣៥២, លើកទី២ ឆ្នាំ១៣៩៤ និងលើកទី៣
+                        ឆ្នាំ១៤២០</label>
+                    <label><input type="radio" name="q86" value="B"> B. លើកទី១ ឆ្នាំ១១៧៧, លើកទី២ ឆ្នាំ១៣៥២ និងលើកទី៣
+                        ឆ្នាំ១៤៣១</label>
+                    <label><input type="radio" name="q86" value="C"> C. លើកទី១ ឆ្នាំ១៣៥២, លើកទី២ ឆ្នាំ១៤២០ និងលើកទី៣
+                        ឆ្នាំ១៥៩៤</label>
+                </div>
+                <div class="explanation" id="exp-q86"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨៧.
+                    តើព្រះមហាក្សត្រខ្មែរអង្គណាដែលបានវាយរំដោះក្រុងអង្គរពីការកាន់កាប់របស់សៀមលើកទី១
+                    នៅឆ្នាំ១៣៥៧ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q87" value="A"> A. ព្រះស្រីសុរិយោវង្សទី១</label>
+                    <label><input type="radio" name="q87" value="B"> B. ព្រះស្រីសុរិយោវង្សទី២</label>
+                    <label><input type="radio" name="q87" value="C"> C. ព្រះបាទពញាយ៉ាត</label>
+                </div>
+                <div class="explanation" id="exp-q87"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨៨.
+                    តើព្រះមហាក្សត្រខ្មែរអង្គណាដែលបានវាយរំដោះក្រុងអង្គរពីការកាន់កាប់របស់សៀមលើកទី២
+                    នៅឆ្នាំ១៤០១ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q88" value="A"> A. ព្រះស្រីសុរិយោវង្សទី១</label>
+                    <label><input type="radio" name="q88" value="B"> B. ព្រះស្រីសុរិយោវង្សទី២</label>
+                    <label><input type="radio" name="q88" value="C"> C. ព្រះបាទពញាយ៉ាត</label>
+                </div>
+                <div class="explanation" id="exp-q88"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨៩.
+                    តើព្រះមហាក្សត្រខ្មែរអង្គណាដែលបានវាយរំដោះក្រុងអង្គរពីការកាន់កាប់របស់សៀមលើកទី៣
+                    នៅឆ្នាំ១៤២១ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q89" value="A"> A. ព្រះស្រីសុរិយោវង្សទី២</label>
+                    <label><input type="radio" name="q89" value="B"> B. ព្រះបាទពញាយ៉ាត</label>
+                    <label><input type="radio" name="q89" value="C"> C. ព្រះបាទចន្ទរាជា</label>
+                </div>
+                <div class="explanation" id="exp-q89"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩០. តើព្រះរាជាខ្មែរអង្គណាដែលបានសម្រេចព្រះទ័យចាកចោលក្រុងអង្គរ
+                    (រើរាជធានីទៅទួលបាសាន
+                    រួចមកចតុមុខ) នៅឆ្នាំ១៤៣១ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q90" value="A"> A. ព្រះបាទពញាយ៉ាត</label>
+                    <label><input type="radio" name="q90" value="B"> B. ព្រះបាទចន្ទរាជា</label>
+                    <label><input type="radio" name="q90" value="C"> C. ព្រះស្រីសុរិយោពណ៌</label>
+                </div>
+                <div class="explanation" id="exp-q90"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩១. តើរាជធានីចតុមុខ (ភ្នំពេញដំបូង) ត្រូវបានកសាងឡើងដោយព្រះមហាក្សត្រអង្គណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q91" value="A"> A. ព្រះបាទអង្គឌួង</label>
+                    <label><input type="radio" name="q91" value="B"> B. ព្រះបាទពញាយ៉ាត</label>
+                    <label><input type="radio" name="q91" value="C"> C. ព្រះបាទចន្ទរាជា</label>
+                </div>
+                <div class="explanation" id="exp-q91"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩២. តើរាជធានីចតុមុខត្រូវបានកសាងឡើងនៅក្នុងឆ្នាំណា (ក្នុងសតវត្សទី១៥) ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q92" value="A"> A. ឆ្នាំ ១៤៣១</label>
+                    <label><input type="radio" name="q92" value="B"> B. ឆ្នាំ ១៤៣៤</label>
+                    <label><input type="radio" name="q92" value="C"> C. ឆ្នាំ ១៥២៧</label>
+                </div>
+                <div class="explanation" id="exp-q92"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩៣. តើព្រះរាជាខ្មែរអង្គណាដែលបានកសាង «បន្ទាយលង្វែក»
+                    ដ៏ល្បីល្បាញក្នុងប្រវត្តិសាស្ត្រ ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q93" value="A"> A. ព្រះបាទពញាយ៉ាត</label>
+                    <label><input type="radio" name="q93" value="B"> B. ព្រះបាទចន្ទរាជា</label>
+                    <label><input type="radio" name="q93" value="C"> C. ព្រះបាទស្រីសុរិយោពណ៌</label>
+                </div>
+                <div class="explanation" id="exp-q93"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩៤. តើបន្ទាយលង្វែកត្រូវបានកសាងឡើងក្នុងកំឡុងឆ្នាំណា
+                    និងប្រើប្រាស់រយៈពេលប៉ុន្មានឆ្នាំ ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q94" value="A"> A. ឆ្នាំ ១៤៣១ ដល់ ១៤៣៤ (រយៈពេល ៣ ឆ្នាំ)</label>
+                    <label><input type="radio" name="q94" value="B"> B. ឆ្នាំ ១៥២៧ ដល់ ១៥២៩ (រយៈពេល ៣ ឆ្នាំ)</label>
+                    <label><input type="radio" name="q94" value="C"> C. ឆ្នាំ ១៦២០ ដល់ ១៦២២ (រយៈពេល ២ ឆ្នាំ)</label>
+                </div>
+                <div class="explanation" id="exp-q94"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩៥. តើបន្ទាយលង្វែកត្រូវបានកងទ័ពសៀមវាយបែក និងបំផ្លិចបំផ្លាញនៅក្នុងឆ្នាំណា ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q95" value="A"> A. ឆ្នាំ ១៤៣១</label>
+                    <label><input type="radio" name="q95" value="B"> B. ឆ្នាំ ១៥៩៤</label>
+                    <label><input type="radio" name="q95" value="C"> C. ឆ្នាំ ១៦២០</label>
+                </div>
+                <div class="explanation" id="exp-q95"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩៦. របងការពារបន្ទាយលង្វែក
+                    ត្រូវបានដាំហ៊ុមព័ទ្ធទៅដោយដើមឫស្សីព្រៃដែលមានកម្រាស់ប៉ុន្មាន ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q96" value="A"> A. កម្រាស់ ១ សិន (៤០ ម៉ែត្រ)</label>
+                    <label><input type="radio" name="q96" value="B"> B. កម្រាស់ ២ សិន (៨០ ម៉ែត្រ)</label>
+                    <label><input type="radio" name="q96" value="C"> C. កម្រាស់ ៤ សិន (១៦០ ម៉ែត្រ)</label>
+                </div>
+                <div class="explanation" id="exp-q96"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩៧. តើបន្ទាយលង្វែកត្រូវបានវាយរំដោះត្រឡប់មកវិញពីសៀម
+                    ដោយស្នាដៃរបស់វីរក្សត្រអង្គណានៅឆ្នាំ១៥៩៤ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q97" value="A"> A. ព្រះបាទរាមាជើងព្រៃ</label>
+                    <label><input type="radio" name="q97" value="B"> B. ព្រះបាទស្រីសុរិយោពណ៌</label>
+                    <label><input type="radio" name="q97" value="C"> C. ព្រះបាទជ័យជេដ្ឋាទី២</label>
+                </div>
+                <div class="explanation" id="exp-q97"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩៨. តើរាជធានីឧដុង្គ (ភ្នំព្រះរាជទ្រព្យ)
+                    ត្រូវបានកសាងឡើងដោយព្រះមហាក្សត្រអង្គណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q98" value="A"> A. ព្រះបាទចន្ទរាជា</label>
+                    <label><input type="radio" name="q98" value="B"> B. ព្រះបាទស្រីសុរិយោពណ៌</label>
+                    <label><input type="radio" name="q98" value="C"> C. ព្រះបាទអង្គឌួង</label>
+                </div>
+                <div class="explanation" id="exp-q98"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៩៩. តើរាជធានីឧដុង្គត្រូវបានកសាងឡើងជាផ្លូវការនៅក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q99" value="A"> A. ឆ្នាំ ១៥៩៤</label>
+                    <label><input type="radio" name="q99" value="B"> B. ឆ្នាំ ១៦២០</label>
+                    <label><input type="radio" name="q99" value="C"> C. ឆ្នាំ ១៨៦៣</label>
+                </div>
+                <div class="explanation" id="exp-q99"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០០. តើស្ដេចខ្មែរអង្គណាដែលបានផ្ដួចផ្ដើមស្នើសុំការអន្តរាគមន៍ពីបារាំង
+                    ដើម្បីការពារទឹកដីខ្មែរពីការលេបត្របាក់របស់យួន និងសៀម ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q100" value="A"> A. ព្រះបាទនរោត្តម</label>
+                    <label><input type="radio" name="q100" value="B"> B. ព្រះបាទអង្គឌួង</label>
+                    <label><input type="radio" name="q100" value="C"> C. ព្រះបាទស៊ីសុវត្ថិ</label>
+                </div>
+                <div class="explanation" id="exp-q100"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០១. តើការធ្វើជំរឿនទូទៅប្រជាជនឆ្នាំ២០១៩ ប្រព្រឹត្តិទៅនៅក្នុងកំឡុងថ្ងៃខែណា
+                    និងមានរយៈពេលប៉ុន្មានថ្ងៃ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q101" value="A"> A. ថ្ងៃទី០១-១០ ខែមករា មានរយៈពេល ១០ ថ្ងៃ</label>
+                    <label><input type="radio" name="q101" value="B"> B. ថ្ងៃទី០៣-១៣ ខែមីនា មានរយៈពេល ១០ ថ្ងៃ</label>
+                    <label><input type="radio" name="q101" value="C"> C. ថ្ងៃទី០៣-១៥ ខែមីនា មានរយៈពេល ១២ ថ្ងៃ</label>
+                </div>
+                <div class="explanation" id="exp-q101"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០២.
+                    តើឥស្សរជនរូបណាដែលទទួលតួនាទីជាប្រធានគណៈកម្មាធិការជាតិជំរឿនទូទៅប្រជាជនកម្ពុជាឆ្នាំ២០១៩ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q102" value="A"> A. សម្តេចតេជោ ហ៊ុន សែន</label>
+                    <label><input type="radio" name="q102" value="B"> B. សម្ដេចក្រឡាហោម ស ខេង ឧបនាយករដ្ឋមន្ត្រី
+                        រដ្ឋមន្ត្រីក្រសួងមហាផ្ទៃ</label>
+                    <label><input type="radio" name="q102" value="C"> C. ឯកឧត្តមរដ្ឋមន្ត្រីក្រសួងផែនការ</label>
+                </div>
+                <div class="explanation" id="exp-q102"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០៣.
+                    តើប្រទេសកម្ពុជាបានរៀបចំធ្វើជំរឿនទូទៅប្រជាជនជាលើកដំបូងបង្អស់នៅក្នុងឆ្នាំណា
+                    និងក្នុងសម័យណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q103" value="A"> A. ឆ្នាំ ១៩៥៣ សម័យទាមទារឯករាជ្យ</label>
+                    <label><input type="radio" name="q103" value="B"> B. ឆ្នាំ ១៩៦២ ក្នុងសម័យសង្គមរាស្ត្រនិយម
+                        (ដឹកនាំដោយសម្តេចព្រះនរោត្តម សីហនុ)</label>
+                    <label><input type="radio" name="q103" value="C"> C. ឆ្នាំ ១៩៩៨
+                        សម័យក្រោយកិច្ចព្រមព្រៀងសន្តិភាពទីក្រុងប៉ារីស</label>
+                </div>
+                <div class="explanation" id="exp-q103"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០៤. គិតចាប់ពីឆ្នាំ១៩៦២ រហូតមកដល់ឆ្នាំ២០១៩
+                    តើប្រទេសកម្ពុជាធ្លាប់បានធ្វើជំរឿនទូទៅចំនួនប៉ុន្មានលើក និងនៅឆ្នាំណាខ្លះ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q104" value="A"> A. ចំនួន ៣ លើក គឺឆ្នាំ ១៩៦២, ២០០៨ និង ២០១៩</label>
+                    <label><input type="radio" name="q104" value="B"> B. ចំនួន ៤ លើក គឺឆ្នាំ ១៩៦២, ១៩៩៨, ២០០៨ និង
+                        ២០១៩</label>
+                    <label><input type="radio" name="q104" value="C"> C. ចំនួន ៥ លើក គឺឆ្នាំ ១៩៦២, ១៩៩៨, ២០០៨, ២០១៥ និង
+                        ២០១៩</label>
+                </div>
+                <div class="explanation" id="exp-q104"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០៥. យោងតាមលទ្ធផលផ្លូវការនៃទិន្នន័យជំរឿនឆ្នាំ២០១៩
+                    តើប្រជាជនកម្ពុជាសរុបមានចំនួនប៉ុន្មាននាក់ (ប្រុស/ស្រី) ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q105" value="A"> A. សរុប ១៣.៤ លាននាក់ (ស្រី ៦.៨ លាន, ប្រុស ៦.៦
+                        លាន)</label>
+                    <label><input type="radio" name="q105" value="B"> B. សរុប ១៥,២៨៨,៤៨៩ នាក់ (ស្រី ៧,៨៦៩,៩១២ នាក់,
+                        ប្រុស ៧,៧,៤១៨,៥៧៧ នាក់)</label>
+                    <label><input type="radio" name="q105" value="C"> C. សរុប ១៦.៥ លាននាក់ (ស្រី ៨.៥ លាន, ប្រុស ៨.០
+                        លាន)</label>
+                </div>
+                <div class="explanation" id="exp-q105"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០៦. បើធ្វើការប្រៀបធៀបទិន្នន័យជំរឿនចន្លោះឆ្នាំ ២០០៨ និងការស្ទង់មតិឆ្នាំ ២០១៥
+                    តើចំនួនប្រជាជនកម្ពុជាបានកើនឡើងប៉ុន្មាននាក់ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q106" value="A"> A. កើនឡើង ៥០០,០០០ នាក់</label>
+                    <label><input type="radio" name="q106" value="B"> B. កើនឡើង ១,៨៩២,៨០៧ នាក់</label>
+                    <label><input type="radio" name="q106" value="C"> C. កើនឡើង ៣,០០០,០០០ នាក់</label>
+                </div>
+                <div class="explanation" id="exp-q106"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០៧. យោងតាមទិន្នន័យជំរឿនឆ្នាំ២០១៩
+                    តើតំបន់ភូមិសាស្ត្រណាដែលមានប្រជាជនរស់នៅកកកុញ
+                    និង«ច្រើនជាងគេ»បំផុតនៅកម្ពុជា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q107" value="A"> A. តំបន់បឹងទន្លេសាប</label>
+                    <label><input type="radio" name="q107" value="B"> B. តំបន់ទំនាបកណ្តាល (មានប្រជាជនរស់នៅ ៧,៤៧៧,៤៤៤
+                        នាក់ ឬ
+                        ៤៨.៩%)</label>
+                    <label><input type="radio" name="q107" value="C"> C. តំបន់ខ្ពង់រាប និងភ្នំ</label>
+                </div>
+                <div class="explanation" id="exp-q107"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០៨. យោងតាមទិន្នន័យជំរឿនឆ្នាំ២០១៩ ដដែល
+                    តើតំបន់ភូមិសាស្ត្រណាដែលមានប្រជាជនរស់នៅ «តិចជាងគេ»
+                    បំផុត ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q108" value="A"> A. តំបន់ខ្ពង់រាប និងភ្នំ</label>
+                    <label><input type="radio" name="q108" value="B"> B. តំបន់ឆ្នេរ និងសមុទ្រ (មានប្រជាជនរស់នៅ ១,០៦១,១៤៨
+                        នាក់ ឬ
+                        ៦.៩%)</label>
+                    <label><input type="radio" name="q108" value="C"> C. តំបន់ទំនាបកណ្តាល</label>
+                </div>
+                <div class="explanation" id="exp-q108"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១០៩. នៅក្នុងការធ្វើជំរឿនប្រជាជន
+                    តើគេរាប់បញ្ចូលប្រជាពលរដ្ឋខ្មែរដែលជាពលករចំណាកស្រុកទៅរស់នៅ
+                    និងធ្វើការនៅក្រៅប្រទេសដែរឬទេ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q109" value="A"> A. រាប់បញ្ចូលទាំងអស់</label>
+                    <label><input type="radio" name="q109" value="B"> B. មិនរាប់បញ្ចូលទេ</label>
+                    <label><input type="radio" name="q109" value="C"> C.
+                        រាប់បញ្ចូលតែអ្នកដែលមានលិខិតឆ្លងដែនផ្លូវការ</label>
+                </div>
+                <div class="explanation" id="exp-q109"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១១០. តើប្រទេសមួយណាដែលប្រជាជនកម្ពុជាបានចំណាកស្រុកទៅធ្វើជាពលកររស់នៅ
+                    និងបម្រើការងារ
+                    «ច្រើនជាងគេ» បំផុត ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q110" value="A"> A. ប្រទេសកូរ៉េខាងត្បូង</label>
+                    <label><input type="radio" name="q110" value="B"> B. ប្រទេសថៃ (មានចំនួនប្រជាជនប្រមាណ ១,១៤៦,៦៨៥
+                        នាក់)</label>
+                    <label><input type="radio" name="q110" value="C"> C. ប្រទេសម៉ាឡេស៊ី</label>
+                </div>
+                <div class="explanation" id="exp-q110"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">១១១. តើភូមិសាស្ត្រ «តំបន់ទំនាបកណ្តាល» នៃប្រទេសកម្ពុជា រួមមានបណ្តាខេត្ត
+                    និងរាជធានីណាខ្លះ
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q111" value="A"> A. ខេត្តកំពង់ចាម ត្បូងឃ្មុំ កណ្ដាល ភ្នំពេញ ព្រៃវែង
+                        ស្វាយរៀង
+                        និងតាកែវ</label>
+                    <label><input type="radio" name="q111" value="B"> B. ខេត្តសៀមរាប បាត់ដំបង ពោធិ៍សាត់ កំពង់ឆ្នាំង
+                        និងកំពង់ធំ</label>
+                    <label><input type="radio" name="q111" value="C"> C. ខេត្តព្រះសីហនុ កំពត កែប និងកោះកុង</label>
+                </div>
+                <div class="explanation" id="exp-q111"></div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <button type="button" id="submitBtn" onclick="checkAnswers(true)">ផ្ទៀងផ្ទាត់លទ្ធផលទាំងអស់</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let timeLeft = 2700; // 45 នាទី
+        let timerInterval;
+        let isSubmitted = false;
+
+        const fullAnswersText = {
+            q1: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. លោក ក្លាប៉ារ៉ែត</strong><br>លោក ក្លាប៉ារ៉ែត (Édouard Claparède) គឺជាអ្នកចិត្តវិទ្យាជនជាតិស្វីស ដែលបានផ្ដល់និយមន័យថា បញ្ញាគឺជាសម្បទាផ្លូវចិត្តសម្រាប់សម្របខ្លួនទៅនឹងស្ថានការណ៍ ឬមជ្ឈដ្ឋានថ្មីៗ។",
+            q2: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ទំនួលខុសត្រូវ</strong><br>ទោះបីជាស្ថិតនៅក្រោមបង្គាប់គេ ប៉ុន្តែការដែលមនុស្សម្នាក់ដឹងខុសត្រូវ ស្គាល់ល្អអាក្រក់ ហើយប្រព្រឹត្តតែអំពើល្អ គឺបង្ហាញពីការមានមនសិការ និងទំនួលខុសត្រូវចំពោះទង្វើរបស់ខ្លួន។",
+            q3: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. មេកានិច</strong><br>ការរអិលដួល បង្កឱ្យមានសម្ពាធ ការប៉ះទង្គិច ឬការប្រែប្រួលលំនឹងរូបរាងកាយ ដែលរំញោចប្រភេទនេះត្រូវបានចាត់ចូលជា រំញោចមេកានិច (Mechanical stimulus)។",
+            q4: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បណ្ឌិត</strong><br>តាមន័យទស្សនវិជ្ជា និងការអប់រំ ជនដែលមានពុទ្ធិសកល (ដឹងសព្វ) មានសមត្ថភាពពេញលេញ ប្រកបដោយគុណធម៌ និងសុភវិនិច្ឆ័យ ត្រូវបានគេចាត់ទុកជា «បណ្ឌិត» ពិតប្រាកដ។",
+            q5: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ដំណាក់រូបវិទ្យា</strong><br>ឥន្ទ្រីយារម្មណ៍ ឬការដឹងតាម حواس ទាំង៥ តែងតែចាប់ផ្ដើមដំបូងបង្អស់ដោយសារមានរំញោចពីមជ្ឈដ្ឋានខាងក្រៅមកប៉ះទង្គិច ដែលដំណាក់កាលនេះហៅថា ដំណាក់រូបវិទ្យា។",
+            q6: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ផ្នែករដ្ឋប្បវេណី</strong><br>ការបំផ្លាញទ្រព្យសម្បត្តិអ្នកដទៃ ដែលទាមទារឱ្យមានការសងការខូចខាត ឬធ្វើឱ្យខូចប្រយោជន៍ឯកជន គឺស្ថិតនៅក្នុងការទទួលខុសត្រូវផ្នែករដ្ឋប្បវេណី (ទាក់ទងនឹងសំណងជំនួស)។",
+            q7: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ទំនោរខាងសោភ័ណភាព</strong><br>តាមចិត្តវិទ្យា ទំនោរដែលចូលចិត្តបំប្លែង ឬបង្កើតភាពភូតកុហកដើម្បីបង្កើតជារឿងរ៉ាវថ្មីៗ (ដូចជាការតែងនិទាន ឬការស្រមៃ) ជារឿយៗត្រូវបានផ្សារភ្ជាប់ទៅនឹងការស្រមៃកែច្នៃបែបសោភ័ណភាព。",
+            q8: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. មនុស្សប៉ុណ្ណោះ</strong><br>បញ្ញាទ្រឹស្ដី គឺជាសមត្ថភាពគិតពិចារណាទៅលើគំនិតអរូបី បង្កើតច្បាប់ ឬទ្រឹស្ដីផ្សេងៗ ដែលសមត្ថភាពជាន់ខ្ពស់នេះកើតមានឡើងតែចំពោះ «មនុស្ស» ប៉ុណ្ណោះ ចំណែកសត្វមានត្រឹមបញ្ញាអនុវត្ត ឬសភាវគតិ។",
+            q9: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. កត្តាភាពនៃទេពកោសល្យ</strong><br>កត្តា ឬនិស្ស័យពីកំណើតដែលជំរុញឱ្យបុគ្គលម្នាក់មានសមត្ថភាពពិសេសក្នុងការបង្កើតថ្មី ឬខ្លាំងពូកែលើជំនាញណាមួយ ហៅថា កត្តាភាពនៃទេពកោសល្យ (Talent/Genius)។",
+            q10: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. សភាវគតិ</strong><br>នៅពេលកើតមកភ្លាម ទារកមិនទាន់មានការអភិវឌ្ឍផ្នែកឆន្ទៈ ឬបញ្ញាស្មារតីជ្រៅជ្រះនៅឡើយទេ គឺរស់នៅនិងឆ្លើយតបទៅនឹងមជ្ឈដ្ឋានជុំវិញតាមរយៈ «សភាវគតិ» ពីកំណើត (ដូចជាការយំ ការបៅដោះជាដើម)។",
+            q11: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. អំពើសភាវគតិ</strong><br>អំពើដែលកើតឡើងភ្លាមៗដោយស្វ័យប្រវត្តិ មិនមានការគិតគូរ ឬព្រាងទុកជាមុនឡើយ គឺជាអំពើសភាវគតិ (ឬអំពើឆ្លុះបញ្ចាំង)។",
+            q12: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. សង្គម</strong><br>ការចង់ឈ្នះ ចង់លេចធ្លោ ឬចង់បានឋានៈលេខមួយនៅក្នុងការប្រកួតប្រជែងជាមួយអ្នកដទៃ គឺជាទំនោរដែលស្តែងឡើងក្នុងទំនាក់ទំនងជាមួយមនុស្សជុំវិញ ហៅថា ទំនោរសង្គម។",
+            q13: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បញ្ញាទ្រឹស្តី</strong><br>សតិ ឬសមត្ថភាពដែលអនុញ្ញាតឱ្យយើងគិតពីគំនិតទូទៅ បញ្ញត្តិអរូបី និងមានភាសាជាជំនួយក្នុងការគិត គឺជាលក្ខណៈសម្បត្តិនៃ «បញ្ញាទ្រឹស្តី»។",
+            q14: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សាសនាព្រះពុទ្ធ</strong><br>ព្រះពុទ្ធសាសនាអប់រំមនុស្សឱ្យជឿលើកម្មផល និងពឹងផ្អែកលើខ្លួនឯង (ខ្លួនទីពឹងខ្លួន) ជាជាងការបន់ស្រន់ ឬជឿលើព្រះអាទិទេពអរូបី។",
+            q15: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. គ្រិស្តសាសនា</strong><br>គ្រិស្តសាសនាមានជំនឿលើព្រះអាទិទេព (ព្រះជាម្ចាស់) ហើយមានទ្រឹស្ដីស្តីពីការលោះបាប ដែលព្រះយេស៊ូទ្រង់បានសុគតនៅលើឈើឆ្កាងដើម្បីលោះបាបជួសមនុស្សលោក។",
+            q16: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សតវត្សទី២ នៃគ.ស.</strong><br>តាមឯកសារប្រវត្តិសាស្ត្រ ព្រះពុទ្ធសាសនាត្រូវបាននាំចូលមកកាន់ទឹកដីកម្ពុជា (សម័យនគរភ្នំ ឬហ្វូណន) ដំបូងបង្អស់នៅក្នុងរវាងសតវត្សទី២ នៃគ្រិស្តសករាជ។",
+            q17: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. មនុស្ស</strong><br>យោងតាមប្រវត្តិពិត ព្រះពុទ្ធសាសនាបង្កើតឡើងដោយព្រះសមណគោតម ដែលព្រះអង្គជាមនុស្ស (ព្រះរាជបុត្រ सिद्धार्थ សិទ្ធត្ថ) ដែលបានខិតខំស្វែងរកធម៌រហូតបានត្រាស់ដឹងជាព្រះពុទ្ធ។",
+            q18: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. សាសនាព្រះពុទ្ធ</strong><br>ព្រះពុទ្ធសាសនាបានពន្យល់ពី រូបកាយ របស់សភាវៈរស់ថា កើតឡើងពីការរួមផ្សំគ្នានៃធាតុទាំង៤ គឺ ធាតុដី (បថវីធាតុ) ធាតុទឹក (អាបោធាតុ) ធាតុភ្លើង (តេជោធាតុ) និងធាតុខ្យល់ (វាយោធាតុ)។",
+            q19: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. អំពើល្អតាមផ្លូវកាយ</strong><br>ការមិនសម្លាប់សត្វ មិនបៀតបៀន មិនធ្វើបាប ឬមិនប្រទូស្តសារ៉ាយរាងកាយអ្នកដទៃ គឺជាការវៀរចាកអំពើអាក្រក់ និងជាការធ្វើល្អតាមផ្លូវកាយ (កាយកម្ម)។",
+            q20: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. កម្ពុជា</strong><br>នៅក្នុងចំណោមជម្រើសទាំងបីនេះ កម្ពុជាគឺជាប្រទេសដែលកាន់ព្រះពុទ្ធសាសនាថេរវាទ (ហីនយាន) ជាសាសនារបស់រដ្ឋ និងមានឥទ្ធិពលខ្លាំងខ្លាបំផុត ឯវៀតណាមភាគច្រើនកាន់មហាយាន ចំណែកម៉ាឡេស៊ីកាន់ឥស្លាម។",
+            q21: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី១០ ធ្នូ ១៩៤៨</strong><br>សេចក្ដីថ្លែងការណ៍ជាសាកលស្ដីពីសិទ្ធិមនុស្ស (UDHR) ត្រូវបានអនុម័តដោយមហាសន្និបាតអង្គការសហប្រជាជាតិនៅថ្ងៃទី១០ ខែធ្នូ ឆ្នាំ១៩៤៨ នាទីក្រុងប៉ារីស។",
+            q22: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ជនជាតិគ្រឹង</strong><br>ជនជាតិគ្រឹង គឺជាបងប្អូនជនជាតិដើមភាគតិចរស់នៅតំបន់ខ្ពង់រាប (ដូចជាខេត្តរតនគិរី) ដែលស្ថិតនៅក្នុងក្រុមអំបូរភាសា មន-ខ្មែរ។",
+            q23: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១៩៧៥–១៩៧៩</strong><br>របបកម្ពុជាប្រជាធិបតេយ្យ ឬសម័យខ្មែរក្រហមអាវខ្មៅ បានគ្រប់គ្រងប្រទេសចាប់ពីថ្ងៃទី១៧ មេសា ឆ្នាំ១៩៧៥ រហូតដល់ដួលរលំនៅថ្ងៃទី៧ មករា ឆ្នាំ១៩៧៩។",
+            q24: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី១៥ ខែតុលា ឆ្នាំ១៩៩២</strong><br>ប្រទេសកម្ពុជាបានចុះហត្ថលេខា និងផ្តល់សច្ចាប័នយល់ព្រមលើអនុសញ្ញាស្តីពីសិទ្ធិកុមារ (CRC) ផ្លូវការនៅថ្ងៃទី១៥ ខែតុលា ឆ្នាំ១៩៩២។",
+            q25: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី២៤ តុលា ១៩៤៥</strong><br>ទោះបីជាធម្មនុញ្ញសហប្រជាជាតិត្រូវបានចុះហត្ថលេខានៅខែមិថុនាក៏ដោយ ប៉ុន្តែអង្គការសហប្រជាជាតិ (UN) ត្រូវបានបង្កើតឡើងនិងមានសុពលភាពជាផ្លូវការនៅថ្ងៃទី២៤ ខែតុលា ឆ្នាំ១៩៤៥។",
+            q26: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ត្រាស់ដឹង</strong><br>ព្រះពុទ្ធសាសនាចាប់កំណើតឡើងជាផ្លូវការ នៅពេលដែលព្រះសមណគោតមទ្រង់បាន «ត្រាស់ដឹង» នូវអរិយសច្ចធម៌ទាំងឡាយនៅក្រោមដើមពោធិព្រឹក្ស និងបានសម្តែងធម៌ទេសនាដំបូង។",
+            q27: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. អាណិកជន</strong><br>អាណិកជន គឺជាជនជាតិ ឬប្រជាពលរដ្ឋនៃប្រទេសមួយ ដែលបានទៅរស់នៅ ឬប្រកបមុខរបររកស៊ីរយៈពេលវែងនៅលើទឹកដីនៃប្រទេសមួយផ្សេងទៀត។",
+            q28: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. មេត្តា</strong><br>មេត្តា គឺសេចក្តីស្រឡាញ់ បំណងល្អ ចង់ឱ្យអ្នកដទៃមានសេចក្តីសុខ ដោយមិនប្រកាន់វណ្ណៈ ពណ៌សម្បុរ ឬរើសអើងអ្វីទាំងអស់។",
+            q29: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សម្មាអាជីវោ</strong><br>សម្មាអាជីវោ នៅក្នុងអង្គមគ្គទាំង៨ គឺមានន័យថា ការប្រកបមុខរបរចិញ្ចឹមជីវិតក្នុងផ្លូវត្រឹមត្រូវ សុចរិត មិនវៀរចាកធម៌ និងមិនខុសច្បាប់។",
+            q30: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ៣ ខែ</strong><br>នៅក្នុងព្រះពុទ្ធសាសនា ពិធីចូលព្រះវស្សាសម្រាប់ព្រះសង្ឃគង់ចាំវស្សានៅក្នុងវត្តអារាម ដោយមិននិមន្តធ្វើដំណើរទៅណាឆ្ងាយ មានរយៈពេល ៣ ខែ (គិតចាប់ពីថ្ងៃ ១រោច ខែអាសាឍ ដល់ ១៥កើត ខែអស្សុជ)។",
+            q31: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី០៣-១៣ ខែមីនា</strong><br>ការធ្វើជំរឿនទូទៅប្រជាជននៅកម្ពុជាលើកទី២ ក្នុងឆ្នាំ២០០៨ គឺបានប្រព្រឹត្តទៅចាប់ពីថ្ងៃទី៣ ដល់ថ្ងៃទី១៣ ខែមីនា ឆ្នាំ២០០៨។",
+            q32: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ក្រសួងផែនការ</strong><br>វិទ្យាស្ថានជាតិស្ថិតិនៃ ក្រសួងផែនការ គឺជាស្ថាប័នផ្លូវការដែលមានសមត្ថកិច្ចក្នុងការរៀបចំ ដឹកនាំ និងអនុវត្តការធ្វើជំរឿនប្រជាជនទូទាំងប្រទេស។",
+            q33: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី២៤ កញ្ញា ១៩៩៣</strong><br>រដ្ឋធម្មនុញ្ញនៃព្រះរាជាណាចក្រកម្ពុជាទី២ ត្រូវបានឡាយព្រះហត្ថលេខា និងប្រកាសឱ្យប្រើប្រាស់ជាផ្លូវការដោយសម្តេចព្រះនរោត្តម សីហនុ នៅថ្ងៃទី២៤ ខែកញ្ញា ឆ្នាំ១៩៩៣។",
+            q34: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១៩៧៥–១៩៧៩</strong><br>នៅក្នុងរបបកម្ពុជាប្រជាធិបតេយ្យ (ខ្មែរក្រហម) ចន្លោះឆ្នាំ ១៩៧៥ ដល់ ១៩៧៩ ប្រព័ន្ធច្បាប់ តុលាការ ព្រមទាំងក្រមខណ្ឌអ្នកច្បាប់ត្រូវបានលុបបំបាត់ និងបំផ្លាញចោលទាំងស្រុង។",
+            q35: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ក្រុមប្រឹក្សារដ្ឋធម្មនុញ្ញ</strong><br>ចំពោះវិវាទ ទាក់ទងនឹងការបោះឆ្នោតជ្រើសតាំងតំណាងរាស្ត្រ កាលណា គ.ជ.ប. មិនអាចដោះស្រាយបាន គឺមានតែ ក្រុមប្រឹក្សារដ្ឋធម្មនុញ្ញ ប៉ុណ្ណោះ ដែលជាស្ថាប័នកំពូលមានសិទ្ធិសម្រេចសេចក្តីបញ្ចប់ចុងក្រោយបង្អស់។",
+            q36: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សេចក្តីសម្រេច ឬ សេចក្តីជូនដំណឹង</strong><br>នៅក្នុងការគ្រប់គ្រងដែនដី រដ្ឋបាលថ្នាក់ក្រោមជាតិ ឬរដ្ឋបាលមូលដ្ឋាន (ដូចជា ក្រុមប្រឹក្សាឃុំ សង្កាត់) មានសមត្ថកិច្ចគតិយុត្តក្នុងការចេញ សេចក្តីសម្រេច ឬ សេចក្តីជូនដំណឹង",
+            q37: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បណ្តឹងរដ្ឋប្បវេណី</strong><br>បណ្តឹងទាក់ទងនឹងសិទ្ធិឯកជន ឬបណ្តឹងទាមទារឱ្យមានការជួសជុលការខូចខាតសម្ភារៈ និងការសងជំងឺចិត្ត ហៅថា បណ្តឹងរដ្ឋប្បវេណី។",
+            q38: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. តុលាការយោធា</strong><br>រាល់បទល្មើសទាំងឡាយណាដែលប្រព្រឹត្តឡើងដោយយោធិន (ទាហាន) ឬពាក់ព័ន្ធនឹងកិច្ចការសន្តិសុខជាតិយោធា ត្រូវទទួលការជំនុំជម្រះនៅ តុលាការយោធា។",
+            q39: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បិទផ្លូវតវ៉ា (ជាស្ថាពរ និងមានអានុភាពលើគ្រប់អំណាច)</strong><br>យោងតាមរដ្ឋធម្មនុញ្ញ រាល់សេចក្តីសម្រេចទាំងឡាយរបស់ក្រុមប្រឹក្សារដ្ឋធម្មនុញ្ញ គឺជាសេចក្តីសម្រេចបិទផ្លូវតវ៉ា ពោលគឺគ្មានស្ថាប័នណាអាចប្តឹងទាស់បានឡើយ។",
+            q40: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. អំណាចតុលាការ</strong><br>អំណាចតុលាការ គឺជាអំណាចឯករាជ្យដែលមានតួនាទីគ្រប់ដណ្តប់លើរឿងក្តីទាំងអស់នៅក្នុងប្រទេស រួមទាំងរឿងក្តីរដ្ឋបាលផងដែរ។",
+            q41: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. របបប្រជាធិបតេយ្យ</strong><br>របបគ្រប់គ្រងរដ្ឋមួយដែលលើកតម្កើង និងយកប្រជារាស្ត្រ ឬប្រជាពលរដ្ឋជាធំ ហៅថា របបប្រជាធិបតេយ្យ。",
+            q42: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. អំណាចឯករាជ្យនៃក្រុមប្រឹក្សារដ្ឋធម្មនុញ្ញ</strong><br>ក្រុមប្រឹក្សារដ្ឋធម្មនុញ្ញ គឺជាស្ថាប័នកំពូល និងឯករាជ្យដែលមាននាទីចម្បងក្នុងការការពារ និងបកស្រាយរដ្ឋធម្មនុញ្ញ។",
+            q43: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. យ៉ាងតិច ៣៥ ឆ្នាំ</strong><br>បើយោងតាមច្បាប់រដ្ឋធម្មនុញ្ញនៃព្រះរាជាណាចក្រកម្ពុជា បេក្ខជនដែលមានសិទ្ធិឈរឈ្មោះជានាយករដ្ឋមន្ត្រី ត្រូវតែជាតំណាងរាស្ត្រដែលមានអាយុយ៉ាងតិច ៣៥ ឆ្នាំឡើងទៅ។",
+            q44: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បជ្ឈការ</strong><br>នៅក្នុងទម្រង់រចនាសម្ព័ន្ធគ្រប់គ្រងរដ្ឋ រដ្ឋបាលកណ្តាល (ថ្នាក់ជាតិ) ត្រូវបានកំណត់ឡើង និងដឹកនាំដោយប្រើ គោលការណ៍បជ្ឈការ (Centralization)។",
+            q45: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. វិបជ្ឈការ</strong><br>ការគ្រប់គ្រងរដ្ឋបាលថ្នាក់ក្រោមជាតិ ឬរដ្ឋបាលមូលដ្ឋាន ត្រូវបានកំណត់ឡើងដោយ គោលការណ៍វិបជ្ឈការ (Decentralization) និងវិមជ្ឈការ ដើម្បីផ្ទេរសិទ្ធិអំណាចទៅថ្នាក់ក្រោម។",
+            q46: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ប្រមូលពន្ធដារ</strong><br>ជំរឿនដំបូងនៅកម្ពុជានាឆ្នាំ១៩២១ ដែលធ្វើឡើងដោយអាណានិគមបារាំង គឺមានគោលបំណងចម្បងដើម្បីក្តោបក្តាប់ទិន្នន័យប្រជាជនសម្រាប់កាតព្វកិច្ចកម្លាំងពលកម្ម និងប្រមូលពន្ធដារ។",
+            q47: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. រាប់ចំនួនប្រជាជន និងប្រមូលទិន្នន័យដើម្បីអភិវឌ្ឍន៍</strong><br>ផ្ទុយពីសម័យអាណានិគម ការធ្វើជំរឿនប្រជាជននៅសម័យទំនើប (ដូចជាឆ្នាំ២០០៨) គឺក្នុងបំណងប្រមូលទិន្នន័យសេដ្ឋកិច្ច-សង្គមពិតប្រាកដ ដើម្បីរៀបចំផែនការអភិវឌ្ឍន៍ជាតិ។",
+            q48: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ១០ ឆ្នាំម្ដង</strong><br>ជាទូទៅ តាមស្តង់ដារអន្តរជាតិ និងច្បាប់ស្ថិតិ គេកំណត់រយៈពេលនៃការធ្វើជំរឿនទូទៅប្រជាជន ចំនួន ១០ ឆ្នាំម្តង។",
+            q49: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ជំទប់</strong><br>មន្ត្រីដែលធ្វើការនៅក្នុងរដ្ឋបាលឃុំ ដែលមានឋានៈបន្ទាប់ពីមេឃុំ គេហៅថា ជំទប់ (ជំទប់ទី១ និងជំទប់ទី២) រីឯថ្នាក់សង្កាត់ហៅថា ចៅសង្កាត់រង។",
+            q50: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. តែងតាំង ឬដកហូតងារឧត្តមមន្ត្រី</strong><br>ព្រះមហាក្សត្រទ្រង់ឡាយព្រះហស្តលេខាលើ «ព្រះរាជក្រឹត្យ» តាមសេចក្តីស្នើរបស់នាយករដ្ឋមន្ត្រី ដើម្បីតែងតាំង ឬដកហូតមុខតំណែង មន្ត្រីជាន់ខ្ពស់ ឧត្តមសេនីយ៍ ឬការប្រោសប្រទានគ្រឿងឥស្សរិយយសជាដើម។",
+            q51: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ទណ្ឌិត</strong><br>ជនជាប់ចោទដែលតុលាការបានសម្រេចផ្តន្ទាទោសដាក់ពន្ធនាគារ តាមរយៈសាលក្រមស្ថាពរ (បិទផ្លូវតវ៉ា) រួចរាល់ហើយ ត្រូវផ្លាស់ប្តូរឋានៈគតិយុត្តិទៅជា «ទណ្ឌិត»។",
+            q52: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះមហាក្សត្រ (តាមរយៈព្រះរាជក្រឹត្យ)</strong><br>នៅក្នុងប្រព័ន្ធតុលាការកម្ពុជា ចៅក្រម និងព្រះរាជអាជ្ញា ត្រូវតែងតាំងឡើងដោយព្រះរាជក្រឹត្យរបស់ព្រះមហាក្សត្រ តាមសេចក្តីសុំយោបល់ពីឧត្តមក្រុមប្រឹក្សានៃអង្គចៅក្រម។",
+            q53: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ក្រសួងមហាផ្ទៃ</strong><br>រដ្ឋបាលខេត្ត និងរាជធានីនៃព្រះរាជាណាចក្រកម្ពុជា គឺជាស្ថាប័នរដ្ឋបាលថ្នាក់ក្រោមជាតិ ដែលចំណុះផ្ទាល់ឱ្យ ក្រសួងមហាផ្ទៃ។",
+            q54: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ការយោគយល់ ឬការសម្រុះសម្រួល</strong><br>ការដោះស្រាយវិវាទក្រៅប្រព័ន្ធតុលាការ (ដូចជាការសម្របសម្រួលនៅមូលដ្ឋាន) គឺត្រូវឈរលើគោលការណ៍ សន្តិវិធី ការយោគយល់ យុត្តិធម៌អន្តរកាល ឬការសម្រុះសម្រួលគ្នា។",
+            q55: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ជនផ្សំគំនិត</strong><br>ជនដែលបានញុះញង់ ជួយទំនុកបម្រុង ផ្តល់មធ្យោបាយ ឬជួយសម្រួលសម្រួលឧបកិច្ចឱ្យគេប្រព្រឹត្តបទល្មើស ហៅថាជា ជនផ្សំគំនិត (Accomplice)។",
+            q56: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សហចារី (អ្នករួមប្រព្រឹត្តបទល្មើស)</strong><br>អ្នកចូលរួមប្រព្រឹត្តបទល្មើសដែលមានឆន្ទៈប្រព្រឹត្តបទល្មើសដូចគ្នាជាមួយចារី ហើយមានវត្តមានរួមគ្នាក្នុងសកម្មភាពនៅកន្លែងកើតហេតុ ហៅថា សហចារី (Co-perpetrator)។",
+            q57: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បណ្តឹងតវ៉ា ឬបណ្តឹងឧទ្ធរណ៍</strong><br>នៅក្នុងនីតិវិធីច្បាប់ ការប្តឹងបដិសេធមិនព្រមទទួលយកសាលក្រម ឬសាលដីកាថ្នាក់ទាប ដើម្បីសុំឱ្យតុលាការថ្នាក់ខ្ពស់ជំនុំជម្រះឡើងវិញ គឺជាការប្តឹងឧទ្ធរណ៍。",
+            q58: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បណ្តឹងរដ្ឋប្បវេណី</strong><br>ដំណើរការប្តឹងផ្តល់ក្នុងគោលបំណងទាមទារសំណងជំងឺចិត្ត ថ្លៃខូចខាត ឬដោះស្រាយជម្លោះផលប្រយោជន៍បុគ្គល គឺជាប្រភេទ បណ្តឹងរដ្ឋប្បវេណី។",
+            q59: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បណ្តឹងរដ្ឋបាល</strong><br>បណ្ដឹងដែលប្តឹងតវ៉ាអំពីករណីមន្ត្រីរាជការ ឬភ្នាក់ងារសាធារណៈរបស់រដ្ឋប្រព្រឹត្តខុសឆ្គង ឬខុសនឹងវិន័យរដ្ឋបាលការងារ ហៅថា បណ្តឹងរដ្ឋបាល។",
+            q60: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. បណ្ដឹងតវ៉ា (ឬបណ្តឹងរដ្ឋបាលតវ៉ា)</strong><br>ទំនាស់គតិយុត្តិដែលកើតឡើងរវាងភាគីឯកជន និងស្ថាប័នរាជការ (រដ្ឋបាលសាធារណៈ) ជុំវិញសេចក្តីសម្រេចណាមួយ នាំឱ្យកើតមាន បណ្តឹងរដ្ឋបាលតវ៉ា។",
+            q61: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បណ្តឹងបរិហារ</strong><br>នៅក្នុងដំណើរការច្បាប់ព្រហ្មទណ្ឌ ការប្តឹងផ្តល់ ឬរាយការណ៍ប្រាប់សមត្ថកិច្ចអំពីករណីមានបទល្មើស ឬការរំលោភសិទ្ធិបុគ្គលធ្ងន់ធ្ងរ ហៅថា បណ្តឹងបរិហារ។",
+            q62: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ជនជាប់ចោទ</strong><br>(ចំណាំ៖ យោងតាមចម្លើយលំដាប់ទី២ ក្នុងជម្រើសរបស់អ្នក) ជនដែលស្ថិតក្នុងដំណើរការនីតិវិធីច្បាប់ ហើយតុលាការបានកាត់ទោសរួចរាល់ ហៅថា ទណ្ឌិត។ ករណីកំពុងរង់ចាំការកាត់ក្តី ហៅថា ជនជាប់ចោទ។",
+            q63: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ជនជាប់ចោទ</strong><br>ជនដែលត្រូវបានចោទប្រកាន់ជាផ្លូវការពីបទល្មើសព្រហ្មទណ្ឌ ប៉ុន្តែតុលាការមិនទាន់បានធ្វើការជំនុំជម្រះក្តី ឬមិនទាន់មានសាលក្រមស្ថាពរនៅឡើយ គេហៅថា ជនជាប់ចោទ។",
+            q64: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ទណ្ឌិត</strong><br>ជនដែលតុលាការបានជំនុំជម្រះ និងចេញសាលក្រមស្ថាពរផ្ត្ន្ទាទោសឱ្យជាប់ពន្ធនាគាររួចរាល់ហើយ ហៅថា ទណ្ឌិត។",
+            q65: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទចន្ទរាជា</strong><br>បន្ទាយលង្វែកត្រូវបានចាប់ផ្តើមកសាងឡើងយ៉ាងរឹងមាំនៅក្នុងសតវត្សទី១៦ ដោយស្នាព្រះហស្ថរបស់ ព្រះបាទចន្ទរាជា (អង្គចន្ទទី១)។",
+            q66: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ព្រះបាទជ័យជេដ្ឋាទី២</strong><br>ព្រះរាជាខ្មែរដែលបានយាងមកតាំងរាជធានីនៅតំបន់ភ្នំឧដុង្គ (ព្រះរាជទ្រព្យ) មុនគេបង្អស់ គឺព្រះបាទជ័យជេដ្ឋាទី២ ក្នុងឆ្នាំ១៦២០។",
+            q67: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទអង្គឌួង</strong><br>ព្រះរាជាខ្មែរដែលបានខិតខំប្រឹងប្រែងខ្លាំងក្លាក្នុងការស្តារវប្បធម៌ អក្សរសាស្ត្រ និងសេដ្ឋកិច្ចប្រទេសជាតិឱ្យរស់រានឡើងវិញនៅចុងសម័យឧដុង្គ គឺ ព្រះបាទអង្គឌួង។",
+            q68: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះបាទធម្មរាជា</strong><br>នៅក្នុងសម័យចតុមុខ ព្រះបាទធម្មរាជា បានលួចចងសម្ព័ន្ធភាពសម្ងាត់ ឬចូលដៃជាមួយសៀម ដើម្បីទាមទាររាជ្យសម្បត្តិពីព្រះរាជាជាបងប្អូន។",
+            q69: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. អំបូរខ្មែរ-មន (ឬមន-ខ្មែរ)</strong><br>បើយោងតាមនរវិទ្យា និងប្រវត្តិសាស្ត្រ ជនជាតិខ្មែរមានដើមកំណើត និងស្ថិតនៅក្នុងក្រុមអំបូរភាសា ខ្មែរ-មន (ឬមន-ខ្មែរ)។",
+            q70: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទនរោត្តម</strong><br>ប្រទេសបារាំងបានចូលមកចុះសន្ធិសញ្ញាធ្វើជាអាណាព្យាបាលលើប្រទេសកម្ពុជានៅថ្ងៃទី១១ សីហា ឆ្នាំ១៨៦៣ នៅក្នុងរជ្ជកាល ព្រះបាទនរោត្តម។",
+            q71: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ប្រសូត្រឆ្នាំ ១១២៥ និងសុគតឆ្នាំ ១២១៨</strong><br>តាមប្រវត្តិសាស្ត្រ និងការស្រាវជ្រាវសិលាចារឹកថ្មីៗ ព្រះបាទជ័យវរ្ម័នទី៧ ព្រះអង្គប្រសូត្រក្នុងរវាងឆ្នាំ ១១២៥ និងសោយទិវង្គតនៅក្នុងឆ្នាំ ១២១៨។",
+            q72: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបិតានាម ធរណីន្ទ្រវរ្ម័នទី២ និងមាតានាម សុដាមណី</strong><br>ព្រះបាទជ័យវរ្ម័នទី៧ មានព្រះបិតាព្រះនាម ព្រះបាទធរណីន្ទ្រវរ្ម័នទី២ និងព្រះមាតាព្រះនាម ព្រះនាងស្រីជយរាជចូឌាមណី (ឬសុដាមណី)។",
+            q73: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១១៨១</strong><br>ក្រោយពីបានវាយរំដោះក្រុងអង្គរពីការឈ្លានពានរបស់ទ័ពចាម ព្រះបាទជ័យវរ្ម័នទី៧ បានឡើងគ្រងរាជសម្បត្តិជាផ្លូវការនៅក្នុងឆ្នាំ ១១៨១។",
+            q74: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះនាងជ័យរាជទេវី (មហេសីទី១-ប្អូន) និងព្រះនាងឥន្ទ្រទេវី (មហេសីទី២-បង)</strong><br>អគ្គមហេសីដ៏ល្បីល្បាញទាំងពីរអង្គរបស់ព្រះអង្គ គឺព្រះនាងជ័យរាជទេវី ហើយក្រោយពេលព្រះនាងសោយទិវង្គតទៅ ព្រះអង្គបានរៀបអភិសេកជាមួយរៀមច្បងគឺ ព្រះនាងឥន្ទ្រទេវី។",
+            q75: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. លើកទី៤ (យសោធរបុរៈ៤)</strong><br>ព្រះបាទជ័យវរ្ម័នទី៧ បានកសាងរៀបចំទីក្រុងអង្គរឡើងវិញ ដែលជាក្រុងអង្គរលើកទី៤ (យសោធរបុរៈទី៤) ដោយមានប្រាសាទបាយ័នជាកណ្តាលទីក្រុង។",
+            q76: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ព្រះបរមនិព្វានបទ</strong><br>ព្រះមរណនាម (នាមក្រោយពេលសោយទិវង្គតទៅកាន់ឋានសួគ៌) របស់ព្រះបាទជ័យវរ្ម័នទី៧ គឺ ព្រះបរមនិព្វានបទ ដោយសារព្រះអង្គជ្រះថ្លាខ្លាំងក្នុងព្រះពុទ្ធសាសនា។",
+            q77: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទជ័យវរ្ម័នទី២</strong><br>ព្រះរាជាដែលបានរំដោះជាតិពីអំណាចជ្វា និងបានបង្រួបបង្រួមទឹកដីចេនឡាឱ្យរួមគ្នាតែមួយ គឺព្រះបាទជ័យវរ្ម័នទី២។",
+            q78: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ៨០២</strong><br>ព្រះបាទជ័យវរ្ម័នទី២ បានធ្វើពិធីទេវរាជប្រកាសឯករាជ្យជាតិនៅលើភ្នំគូលែន (មហេន្ទ្របព៌ត) នៅក្នុងឆ្នាំ ៨០២ នៃគ.ស ដែលជាការចាប់ផ្តើមសម័យអង្គរ។",
+            q79: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទយសោវរ្ម័នទី១</strong><br>ព្រះរាជាដែលបានផ្តើមកសាងក្រុងអង្គរទី១ (យសោធរបុរៈទី១) ដោយមានភ្នំបាខែងជាស្នូលកណ្តាលក្រុង គឺ ព្រះបាទយសោវរ្ម័នទី១។",
+            q80: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះបាទសូរ្យវរ្ម័នទី១ និងព្រះបាទឧទយាទិត្យវរ្ម័នទី២</strong><br>ព្រះរាជាដែលបានរៀបចំ និងផ្តើមកសាងក្រុងអង្គរទី២ (យសោធរបុរៈទី២) ត្រង់បរិវេណប្រាសាទបាពួន គឺព្រះបាទសូរ្យវរ្ម័នទី១ និងបានសង់បញ្ចប់ដោយព្រះបាទឧទយាទិត្យវរ្ម័នទី២។",
+            q81: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទសូរ្យវរ្ម័នទី២</strong><br>ព្រះបាទសូរ្យវរ្ម័នទី២ គឺជាវីរក្សត្រដែលបានដឹកនាំ និងផ្តើមកសាងក្រុងអង្គរទី៣ (យសោធរបុរៈ៣) ដែលមានប្រាសាទអង្គរវត្តដ៏វិសេសវិសាលជាស្នូលកណ្តាលនៃរាជធានី។",
+            q82: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទជ័យវរ្ម័នទី៧</strong><br>ក្រុងអង្គរទី៤ (យសោធរបុរៈ៤) ឬអង្គរធំ ត្រូវបានផ្តើមកសាងឡើងវិញយ៉ាងរឹងមាំដោយព្រះបាទជ័យវរ្ម័នទី៧ ដោយមានប្រាសាទបាយ័ន (មុខព្រហ្ម) ស្ថិតនៅចំកណ្តាលក្រុង។",
+            q83: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ឆ្នាំ ១៣៥២</strong><br>តាមប្រវត្តិសាស្ត្រ កងទ័ពសៀមបានលើកមកវាយលុក និងចូលកាន់កាប់ក្រុងអង្គរជាលើកដំបូងបង្អស់នៅក្នុងឆ្នាំ ១៣៥២ នាសម័យអង្គរចុងក្រោយ។",
+            q84: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១៣៩៤</strong><br>ការវាយលុកចូលកាន់កាប់ក្រុងអង្គរជាលើកទី២ ពីសំណាក់កងទ័ពសៀម គឺបានកើតឡើងនៅក្នុងឆ្នាំ ១៣៩៤។",
+            q85: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ឆ្នាំ ១៤៣១</strong><br>កងទ័ពសៀមបានលើកមកវាយលុកចូលកាន់កាប់ក្រុងអង្គរជាលើកទី៣ នៅក្នុងឆ្នាំ ១៤៣១ ដែលនាំឱ្យមានការសម្រេចចិត្តរើរាជធានីជាបន្តបន្ទាប់។",
+            q86: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. </strong> យោងតាមសៀវភៅប្រវត្តិសាស្ត្រកម្ពុជាដែលប្រើជាទូទៅ កងទ័ពសៀមបានវាយលុកក្រុងអង្គរសំខាន់ៗចំនួន ៣ លើក គឺនៅឆ្នាំ ១៣៥២, ១៣៩៤ និង ១៤៣១។ ឆ្នាំ ១១៧៧ គឺជាការវាយលុករបស់ទ័ពចាម មិនមែនទ័ពសៀមទេ។",
+            q87: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះស្រីសុរិយោវង្សទី១</strong><br>ព្រះមហាក្សត្រខ្មែរដែលបានដឹកនាំទ័ពវាយរំដោះក្រុងអង្គរត្រឡប់មកវិញពីការកាន់កាប់របស់សៀមលើកទី១ ក្នុងឆ្នាំ១៣៥៧ គឺព្រះស្រីសុរិយោវង្សទី១។",
+            q88: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ព្រះបាទពញាយ៉ាត</strong><br>(ចំណាំ៖ ផ្អែកតាមព្រះរាជពង្សាវតារខ្លះ) ការវាយរំដោះក្រុងអង្គរពីសៀមនៅសម័យនោះ គឺស្ថិតក្រោមស្នាព្រះហស្ថដឹកនាំរបស់វីរក្សត្រ ព្រះបាទពញាយ៉ាត។",
+            q89: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទពញាយ៉ាត</strong><br>ព្រះបាទពញាយ៉ាត គឺជាព្រះមហាក្សត្រដែលបានវាយរំដោះ និងក្តោបក្តាប់ក្រុងអង្គរឡើងវិញ មុនពេលព្រះអង្គសម្រេចព្រះទ័យរើរាជធានីទៅភាគខាងត្បូង។",
+            q90: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះបាទពញាយ៉ាត</strong><br>ដោយសារតែក្រុងអង្គរស្ថិតនៅកៀកព្រំដែនសៀមពេក នាំឱ្យរងការគំរាមកំហែងមិនចេះចប់ ព្រះបាទពញាយ៉ាត ក៏បានសម្រេចព្រះទ័យចាកចោលក្រុងអង្គរទៅតាំងរាជធានីនៅទួលបាសាន រួចបន្តមកចតុកោណចតុមុខក្នុងឆ្នាំ១៤៣១។",
+            q91: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទពញាយ៉ាត</strong><br>រាជធានីចតុមុខ (ភ្នំពេញដំបូង) ត្រូវបានកសាងឡើងដោយស្នាព្រះហស្ថរបស់ព្រះបាទពញាយ៉ាត ក្រោយពេលព្រះអង្គផ្លាស់ប្តូរទីតាំងរាជធានីពីតំបន់អង្គរ។",
+            q92: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១៤៣៤</strong><br>បន្ទាប់ពីការរៀបចំរួចរាល់ ព្រះបាទពញាយ៉ាតបានយាងមកគង់ប្រថាប់ និងប្រកាសបង្កើតរាជធានីចតុមុខជាផ្លូវការនៅក្នុងឆ្នាំ ១៤៣៤។",
+            q93: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទចន្ទរាជា</strong><br>ព្រះបាទចន្ទរាជា (អង្គចន្ទទី១) គឺជាព្រះមហាក្សត្រដ៏ខ្លាំងពូកែ ដែលបានផ្ដើវផ្ដើមកសាង «បន្ទាយលង្វែក» ដ៏ល្បីល្បាញដើម្បីធ្វើជាគ្រឹះការពារជាតិ។",
+            q94: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១៥២៧ ដល់ ១៥២៩ (រយៈពេល ៣ ឆ្នាំ)</strong><br>បន្ទាយលង្វែកត្រូវបានចាប់ផ្តើមកសាងយ៉ាងសម្រិតសម្រាំងចាប់ពីឆ្នាំ ១៥២៧ រហូតដល់ឆ្នាំ ១៥២៩ ដោយប្រើប្រាស់រយៈពេលសរុប ៣ ឆ្នាំពេញ។",
+            q95: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១៥៩៤</strong><br>បន្ទាយលង្វែកដ៏រឹងមាំរបស់ខ្មែរ ត្រូវបានកងទ័ពសៀមវាយបែក និងបំផ្លិចបំផ្លាញទាំងស្រុងនៅក្នុងឆ្នាំ ១៥៩៤ ដែលជាប្រវត្តិសាស្ត្រដ៏ជូរចត់មួយ។",
+            q96: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. កម្រាស់ ២ សិន (៨០ ម៉ែត្រ)</strong><br>យោងតាមឯកសារប្រវត្តិសាស្ត្រ របងការពារបន្ទាយលង្វែក ត្រូវបានដាំហ៊ុមព័ទ្ធដោយដើមឫស្សីព្រៃយ៉ាងក្រាស់ឃ្មឹក ដែលមានកម្រាស់ដល់ទៅ ២ សិន (ស្មើនឹងប្រមាណ ៨០ ម៉ែត្រ)។",
+            q97: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះបាទរាមាជើងព្រៃ</strong><br>ក្រោយពេលលង្វែកបែក វីរក្សត្រដែលបានងើបឈរឡើងប្រមូលកម្លាំងទ័ពទៅវាយបណ្តេញសៀម និងរំដោះតំបន់លង្វែកមកវិញក្នុងឆ្នាំ១៥៩៤ គឺ ព្រះបាទរាមាជើងព្រៃ។",
+            q98: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទស្រីសុរិយោពណ៌</strong><br>ព្រះបាទស្រីសុរិយោពណ៌ គឺជាព្រះមហាក្សត្រដែលបានផ្ដើវផ្ដើមរៀបចំ និងយាងមកតាំងរាជធានីនៅតំបន់ឧដុង្គ (ភ្នំព្រះរាជទ្រព្យ)។",
+            q99: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១៦២០</strong><br>រាជធានីឧដុង្គត្រូវបានរៀបចំ និងប្រកាសកសាងជាផ្លូវការនៅក្នុងឆ្នាំ ១៦២០ ក្នុងរជ្ជកាលបន្តបន្ទាប់ (ព្រះបាទជ័យជេដ្ឋាទី២)។",
+            q100: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទអង្គឌួង</strong><br>ព្រះបាទអង្គឌួង គឺជាព្រះមហាក្សត្រដែលបានផ្ដើវផ្ដើមធ្វើលិខិតទាក់ទងទៅណាប៉ូឡេអុងទី៣ នៃប្រទេសបារាំង ដើម្បីស្វែងរកកិច្ចអន្តរាគមន៍ការពារទឹកដី ទើបឈានដល់ការចុះសន្ធិសញ្ញានៅរជ្ជកាលក្រោយ។",
+            q101: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ថ្ងៃទី០៣-១៥ ខែមីនា មានរយៈពេល ១២ ថ្ងៃ</strong><br>ការធ្វើជំរឿនទូទៅប្រជាជននៅកម្ពុជានាឆ្នាំ២០១៩ គឺបានប្រព្រឹត្តទៅចាប់ពីថ្ងៃទី៣ ដល់ថ្ងៃទី១៥ ខែមីនា ឆ្នាំ២០១៩ ដោយប្រើប្រាស់រយៈពេលសរុប ៣២ ថ្ងៃ។",
+            q102: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សម្ដេចក្រឡាហោម ស ខេង ឧបនាយករដ្ឋមន្ត្រី រដ្ឋមន្ត្រីក្រសួងមហាផ្ទៃ</strong><br>នៅក្នុងការធ្វើជំរឿនឆ្នាំ២០១៩ ឥស្សរជនដែលទទួលតួនាទីជាប្រធានគណៈកម្មាធិការជាតិជំរឿន គឺសម្ដេចក្រឡាហោម ស ខេង។",
+            q103: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ១៩៦២ ក្នុងសម័យសង្គមរាស្ត្រនិយម (ដឹកនាំដោយសម្តេចព្រះនរោត្តម សីហនុ)</strong><br>ប្រទេសកម្ពុជាបានរៀបចំធ្វើជំរឿនទូទៅប្រជាជនជាផ្លូវការតាមស្តង់ដារលើកដំបូងបង្អស់នៅក្នុងឆ្នាំ ១៩៦២ ក្នុងសម័យសង្គមរាស្ត្រនិយម។",
+            q104: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ចំនួន ៤ លើក គឺឆ្នាំ ១៩៦២, ១៩៩៨, ២០០៨ និង ២០១៩</strong><br>គិតត្រឹមឆ្នាំ២០១៩ ព្រះរាជាណាក្រកម្ពុជាធ្លាប់បានធ្វើជំរឿនទូទៅប្រជាជនបានចំនួន ៤ លើក រួចមកហើយ គឺនៅឆ្នាំ ១៩៦២, ១៩៩៨, ២០០៨ និងឆ្នាំ ២០១៩។",
+            q105: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សរុប ១៥,២៨៨,៤៨៩ នាក់ (ស្រី ៧,៨៦៩,៩១២ នាក់, ប្រុស ៧,៤១៨,៥៧៧ នាក់)</strong><br>យោងតាមរបាយការណ៍លទ្ធផលផ្លូវការចុងក្រោយនៃជំរឿនទូទៅប្រជាជនឆ្នាំ២០១៩ ចំនួនប្រជាជនសរុបគឺ ១៥,២៨៨,៤៨៩ នាក់។",
+            q106: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. កើនឡើង ១,៨៩២,៨០៧ នាក់</strong><br>តាមទិន្នន័យប្រៀបធៀបផ្នែកស្ថិតិ ចំនួនប្រជាជនកម្ពុជាមានសន្ទុះកើនឡើងប្រមាណជិត ២ លាននាក់ (លម្អិត៖ ១,៨៩២,៨០៧ នាក់) ក្នុងចន្លោះពេលនោះ។",
+            q107: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. តំបន់ទំនាបកណ្តាល (មានប្រជាជនរស់នៅ ៧,៤៧៧,៤៤៤ នាក់ ឬ ៤៨.៩%)</strong><br>តំបន់ទំនាបកណ្តាល គឺជាភូមិសាស្ត្រអំណោយផល ដែលមានប្រជាជនរស់នៅកកកុញ និងច្រើនជាងគេបំផុត (ជិតពាក់កណ្តាលនៃប្រទេស)។",
+            q108: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. តំបន់ឆ្នេរ និងសមុទ្រ (មានប្រជាជនរស់នៅ ១,០៦១,១៤៨ នាក់ ឬ ៦.៩%)</strong><br>ផ្ទុយទៅវិញ តំបន់ឆ្នេរ និងសមុទ្រ គឺជាភូមិសាស្ត្រដែលមានសមាមាត្រប្រជាជនរស់នៅតិចជាងគេបំផុត បើធៀបនឹងតំបន់ផ្សេងទៀត។",
+            q109: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. មិនរាប់បញ្ចូលទេ</strong><br>នៅក្នុងគោលការណ៍ជំរឿនប្រជាជន គេរាប់តែប្រជាពលរដ្ឋដែលវត្តមានរស់នៅលើទឹកដីជាក់ស្តែងប៉ុណ្ណោះ ដូច្នេះពលករចំណាកស្រុកដែលទៅរស់នៅក្រៅប្រទេសរយៈពេលវែង គឺមិនត្រូវបានរាប់បញ្ចូលឡើយ។",
+            q110: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ប្រទេសថៃ (មានចំនួនប្រជាជនប្រមាណ ១,១៤៦,៦៨៥ នាក់)</strong><br>ប្រទេសថៃ គឺជាប្រទេសជិតខាងដែលពលករចំណាកស្រុកខ្មែរ បានធ្វើការផ្លាស់ទីទៅរស់នៅ និងបម្រើការងារច្រើនជាងគេបំផុត (ជាង ១ លាននាក់)។",
+            q111: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ខេត្តកំពង់ចាម ត្បូងឃ្មុំ កណ្ដាល ភ្នំពេញ ព្រៃវែង ស្វាយរៀង និងតាកែវ</strong><br>ភូមិសាស្ត្រ «តំបន់ទំនាបកណ្តាល» រួមបញ្ចូលទាំងបណ្តាខេត្ត និងរាជធានីទាំងនេះ ដែលស្ថិតនៅតាមបណ្តោយអាងទន្លេមេគង្គ និងទន្លេបាសាក់។"
+        };
+
+        function startTimer() {
+            const timerElement = document.getElementById('timer');
+            if (!timerElement) return;
+
+            timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.innerHTML = "អស់ពេលកំណត់ហើយ!";
+                    timerElement.classList.add('danger');
+                    checkAnswers(false);
+                } else {
+                    timeLeft--;
+                    let minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                    let seconds = (timeLeft % 60).toString().padStart(2, '0');
+
+                    timerElement.innerHTML = `ពេលវេលានៅសល់៖ ${minutes}:${seconds}`;
+
+                    if (timeLeft <= 30) {
+                        timerElement.classList.add('danger');
+                    }
+                }
+            }, 1000);
+        }
+
+        function checkAnswers(isManualClick) {
+            if (isSubmitted) return;
+            isSubmitted = true;
+
+            clearInterval(timerInterval);
+
+            // បិទមិនឱ្យចុច Submit ឬជ្រើសរើសចម្លើយទៀតឡើយ
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn) submitBtn.disabled = true;
+
+            document.querySelectorAll('input[type="radio"]').forEach(input => input.disabled = true);
+
+            const correctAnswers = {
+                q1: 'A', q2: 'B', q3: 'A', q4: 'B', q5: 'A', q6: 'B', q7: 'B', q8: 'B', q9: 'A', q10: 'A',
+                q11: 'C', q12: 'C', q13: 'B', q14: 'B', q15: 'A', q16: 'B', q17: 'B', q18: 'A', q19: 'A', q20: 'A',
+                q21: 'B', q22: 'B', q23: 'B', q24: 'A', q25: 'B', q26: 'C', q27: 'B', q28: 'A', q29: 'B', q30: 'B',
+                q31: 'B', q32: 'B', q33: 'A', q34: 'B', q35: 'B', q36: 'B', q37: 'B', q38: 'B', q39: 'B', q40: 'B',
+                q41: 'B', q42: 'C', q43: 'C', q44: 'B', q45: 'B', q46: 'B', q47: 'A', q48: 'B', q49: 'B', q50: 'B',
+                q51: 'B', q52: 'B', q53: 'B', q54: 'B', q55: 'B', q56: 'B', q57: 'B', q58: 'B', q59: 'B', q60: 'A',
+                q61: 'B', q62: 'B', q63: 'B', q64: 'B', q65: 'B', q66: 'C', q67: 'B', q68: 'A', q69: 'B', q70: 'B',
+                q71: 'A', q72: 'B', q73: 'B', q74: 'A', q75: 'B', q76: 'C', q77: 'B', q78: 'B', q79: 'B', q80: 'A',
+                q81: 'B', q82: 'B', q83: 'A', q84: 'B', q85: 'C', q86: 'A', q87: 'A', q88: 'C', q89: 'B', q90: 'A',
+                q91: 'B', q92: 'B', q93: 'B', q94: 'B', q95: 'B', q96: 'B', q97: 'A', q98: 'B', q99: 'B', q100: 'B',
+                q101: 'C', q102: 'B', q103: 'B', q104: 'B', q105: 'B', q106: 'B', q107: 'B', q108: 'B', q109: 'B', q110: 'B',
+                q111: 'A'
+            };
+
+            let score = 0;
+            let totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let key in correctAnswers) {
+                const correctAnswer = correctAnswers[key];
+                const selectedInput = document.querySelector(`input[name="${key}"]:checked`);
+                const allInputs = document.querySelectorAll(`input[name="${key}"]`);
+
+                allInputs.forEach(input => {
+                    if (input.value === correctAnswer) {
+                        input.parentElement.classList.add('correct');
+                    }
+                });
+
+                if (selectedInput) {
+                    if (selectedInput.value === correctAnswer) {
+                        score++;
+                    } else {
+                        selectedInput.parentElement.classList.add('incorrect');
+                    }
+                }
+
+                const expDiv = document.getElementById(`exp-${key}`);
+                if (expDiv && fullAnswersText[key]) {
+                    expDiv.innerHTML = fullAnswersText[key];
+                    expDiv.style.display = "block";
+                }
+            }
+
+            let percentage = Math.round((score / totalQuestions) * 100);
+            const resultDiv = document.getElementById('result');
+
+            if (resultDiv) {
+                resultDiv.style.display = "block";
+                let statusText = isManualClick ? "ការប្រលងត្រូវបានបញ្ចប់ដោយជោគជ័យ!" : "អស់ពេលកំណត់ធ្វើកិច្ចការហើយ!";
+                resultDiv.innerHTML = `${statusText} <br> អ្នកទទួលបានពិន្ទុ៖ <strong>${score} / ${totalQuestions}</strong> សំណួរ (សមមូលនឹង <strong>${percentage}%</strong>)<br><small style="color:#666; font-size:1rem;">សូមអូសទៅមើលខាងលើវិញ ដើម្បីអានចម្លើយលម្អិតពេញលេញនៃសំណួរនីមួយៗ។</small>`;
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+       
+        startTimer();
+    </script>
+</body>
+
+</html>
